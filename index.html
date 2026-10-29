@@ -34,7 +34,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .bg i:nth-child(2){width:44vw;height:44vw;right:-12vw;top:2vw;background:radial-gradient(circle,#FFC43A,transparent 68%);opacity:.6}
 .bg i:nth-child(3){width:40vw;height:40vw;left:34vw;top:70vh;background:radial-gradient(circle,#F2402C,transparent 68%);opacity:.4}
 .bg i:nth-child(4){width:30vw;height:30vw;right:6vw;top:130vh;background:radial-gradient(circle,#FF9A1F,transparent 68%);opacity:.38}
-main,nav,footer,#v-auth,#v-portal{position:relative;z-index:1}
+main,nav,footer,#v-auth,#v-portal,#v-comparador{position:relative;z-index:1}
 a{color:inherit}
 p{margin:0}
 h1,h2,h3{font-family:var(--f-display);margin:0;letter-spacing:-.03em;text-wrap:balance}
@@ -63,7 +63,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,s
 .mgo{display:inline-block;flex:none;overflow:visible}
 .sr{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
 /* views */
-body[data-view="auth"] .only-home,body[data-view="portal"] .only-home,body[data-view="home"] .only-app{display:none}
+body[data-view="auth"] .only-home,body[data-view="portal"] .only-home,body[data-view="comparador"] .only-home,body[data-view="home"] .only-app{display:none}
 /* nav */
 nav{position:sticky;top:calc(env(safe-area-inset-top,0px) + .6rem);z-index:50;margin-top:.6rem}
 .nav-in{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.45rem .5rem .45rem 1rem;border-radius:999px}
@@ -678,6 +678,52 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
 .vid.big .vcard[data-pos="0"]{width:100%}
 .vid.big .vcard[data-pos="1"],.vid.big .vcard[data-pos="-1"]{opacity:0;pointer-events:none}
 .vid.big .vid-nav{display:none}
+
+/* ---- comparador de precios (vista #comparador) ---- */
+#v-comparador{position:relative;z-index:1}
+.cpx{padding-block:clamp(1.6rem,4vw,2.8rem) clamp(2.4rem,6vw,4rem);display:grid;gap:1.3rem}
+.cpx .head{margin:0 auto .4rem}
+.cpx .head h1{font-size:clamp(2rem,4.4vw,3.1rem)}
+.cmp-filters{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:.9rem;padding:1.1rem}
+@media(max-width:760px){.cmp-filters{grid-template-columns:1fr}}
+.cmp-filters input[type=search]{width:100%;font:inherit;font-weight:600;color:var(--fg);padding:.8rem 1rem;border-radius:.9rem;border:1px solid var(--glass-line);background:rgba(255,255,255,.06);box-shadow:var(--hi);-webkit-appearance:none;appearance:none}
+.cmp-filters input[type=search]::placeholder{color:var(--faint);font-weight:500}
+.cmp-tabs{display:flex;flex-wrap:wrap;gap:.5rem}
+.cmp-tab{font:inherit;font-size:.86rem;font-weight:600;color:var(--muted);background:var(--glass-solid);border:1px solid var(--glass-line);box-shadow:var(--hi);border-radius:999px;padding:.5rem 1.05rem;cursor:pointer}
+.cmp-tab:hover{color:var(--fg)}
+.cmp-tab[aria-pressed="true"]{background:var(--sun);color:var(--ink);border-color:transparent;font-weight:700;box-shadow:0 10px 26px -12px rgba(255,106,43,.8),inset 0 1px 0 rgba(255,255,255,.5)}
+.cmp-sum{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.3rem 1rem;color:var(--muted);font-size:.85rem}
+.cmp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+@media(max-width:980px){.cmp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.cmp-grid{grid-template-columns:1fr}}
+.cmp-card{padding:1.3rem;display:flex;flex-direction:column;gap:.85rem;background:var(--glass);backdrop-filter:none;-webkit-backdrop-filter:none}
+.cmp-top{display:flex;align-items:center;justify-content:space-between;gap:.6rem}
+.cmp-prov{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--f-display);font-weight:600;font-size:.92rem}
+.cmp-prov::before{content:"";width:.6rem;height:.6rem;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c)}
+.cmp-card h3{font-size:1.15rem;line-height:1.25}
+.cmp-desc{color:var(--muted);font-size:.88rem;margin-top:.3rem}
+.cmp-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:.1rem .4rem}
+.cmp-price b{font-family:var(--f-display);font-size:2rem;font-weight:800;letter-spacing:-.04em;line-height:1.1;font-variant-numeric:tabular-nums}
+.cmp-price b.none{font-size:1.3rem;color:var(--muted);font-weight:700;letter-spacing:-.02em}
+.cmp-price span{color:var(--muted);font-size:.85rem}
+.cmp-list{color:var(--muted);font-size:.8rem;margin-top:.15rem}
+.cmp-feat{list-style:none;padding:0;margin:0;display:grid;gap:.5rem;color:var(--muted);font-size:.88rem}
+.cmp-feat li{display:flex;gap:.6rem;align-items:flex-start}
+.cmp-feat li::before{content:"\2713";flex:none;display:grid;place-items:center;width:1.05rem;height:1.05rem;margin-top:.2rem;border-radius:50%;background:var(--leaf-soft);color:var(--leaf);font-size:.66rem;font-weight:800;line-height:1}
+.cmp-feat li.unk::before{content:"!";background:var(--mango-soft);color:var(--yellow)}
+.cmp-promo{font-size:.82rem;color:var(--muted)}
+.cmp-promo b{color:var(--fg);font-weight:600}
+.cmp-foot{margin-top:auto;padding-top:.9rem;border-top:1px solid var(--line);display:grid;gap:.6rem}
+.cmp-src{font-size:.76rem;color:var(--faint)}
+.cmp-foot .btn{padding:.6rem 1rem;font-size:.86rem}
+.cmp-empty{grid-column:1/-1;padding:2.2rem 1.2rem;text-align:center;color:var(--muted);border:1px dashed var(--glass-line);border-radius:1.2rem}
+.cmp-note{padding:1rem 1.2rem;border-radius:1.1rem;border:1px solid rgba(255,154,31,.4);background:var(--mango-soft);color:var(--muted);font-size:.88rem}
+.cmp-note b{color:var(--yellow)}
+.cmp-how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+@media(max-width:760px){.cmp-how{grid-template-columns:1fr}}
+.cmp-how>div{padding:1.2rem;display:grid;gap:.4rem;align-content:start;backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--glass)}
+.cmp-how p{color:var(--muted);font-size:.9rem}
+.cpx .final{justify-self:stretch;width:100%;margin-top:.6rem}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -695,7 +741,7 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
 <nav><div class="wrap">
   <div class="nav-in glass">
     <a class="brand" href="#top"><svg class="mgo" width="32" height="32" aria-hidden="true"><use href="#mango"/></svg>Manguito</a>
-    <div class="links only-home"><a href="#como">Cómo funciona</a><a href="#calculadora">Calculadora</a><a href="#precios">Precios</a><a href="#seguridad">Seguridad</a><a href="#faq">Preguntas</a></div>
+    <div class="links only-home"><a href="#como">Cómo funciona</a><a href="#calculadora">Calculadora</a><a href="#comparador">Comparador</a><a href="#precios">Precios</a><a href="#seguridad">Seguridad</a><a href="#faq">Preguntas</a></div>
     <div class="only-home"><a class="btn btn-primary btn-shine" href="#registro">Empezar gratis</a></div>
     <div class="only-app"><a class="btn btn-ghost" href="#top" id="nav-exit">Salir</a></div>
   </div>
@@ -712,6 +758,7 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
     <div class="cta-row">
       <a class="btn btn-primary btn-shine" href="#registro">Empezar gratis</a>
       <a class="btn btn-ghost" href="#calculadora">Calcular mi ahorro</a>
+      <a class="btn btn-ghost" href="#comparador">Comparar precios</a>
     </div>
     <div class="badges">
       <span class="badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Cifrado AES-256</span>
@@ -912,10 +959,54 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
 
 <footer><div class="wrap foot">
   <div><a class="brand" href="#top" style="font-size:1.05rem"><svg class="mgo" width="26" height="26" aria-hidden="true"><use href="#mango"/></svg>Manguito</a><p style="margin-top:.5rem;max-width:26em"><b style="color:var(--yellow)">Cada mango cuenta.</b> Optimizamos tus costos de telefonía, internet y cable. Si no ahorrás, no pagás.</p></div>
-  <div class="cols"><a href="#login">Portal de clientes</a><a href="#">Términos y condiciones</a><a href="#">Privacidad</a><a href="#">Defensa del consumidor</a></div>
+  <div class="cols"><a href="#comparador">Comparador de precios</a><a href="#login">Portal de clientes</a><a href="#">Términos y condiciones</a><a href="#">Privacidad</a><a href="#">Defensa del consumidor</a></div>
   <p style="width:100%">© 2026 Manguito. Todos los derechos reservados.</p>
 </div></footer>
 </div>
+
+<!-- Comparador de precios -->
+<div id="v-comparador" hidden><div class="wrap cpx">
+  <div class="head">
+    <span class="eyebrow">Comparador de precios</span>
+    <h1>Compará planes y compañías. <span class="grad">Elegí con información.</span></h1>
+    <p>Internet, TV, streaming y celular de Personal Flow, Telecentro, DirecTV, Claro e iPlan en un solo lugar. Mirá los precios publicados, qué incluye cada plan y las condiciones de cada promoción.</p>
+    <span class="badge">Actualización de referencia: 29/10/2026 · Argentina</span>
+  </div>
+
+  <div class="glass cmp-filters" role="search" aria-label="Filtros del comparador">
+    <div class="field"><label for="cmp-q">Buscar un plan</label><input id="cmp-q" type="search" placeholder="Ej. fibra 300, Flow, 1000 Mb" autocomplete="off"></div>
+    <div class="field"><label for="cmp-company">Compañía</label><select id="cmp-company"><option value="">Todas las compañías</option><option>Personal Flow</option><option>Telecentro</option><option>DirecTV</option><option>Claro</option><option>iPlan</option></select></div>
+    <div class="field"><label for="cmp-order">Ordenar por</label><select id="cmp-order"><option value="default">Recomendados</option><option value="price">Menor precio publicado</option><option value="speed">Mayor velocidad (internet)</option></select></div>
+  </div>
+
+  <div class="cmp-tabs" role="group" aria-label="Categorías">
+    <button type="button" class="cmp-tab" data-type="Todos" aria-pressed="true">Todos</button>
+    <button type="button" class="cmp-tab" data-type="Internet" aria-pressed="false">Internet hogar</button>
+    <button type="button" class="cmp-tab" data-type="TV" aria-pressed="false">TV y cable</button>
+    <button type="button" class="cmp-tab" data-type="Streaming" aria-pressed="false">Streaming</button>
+    <button type="button" class="cmp-tab" data-type="Celular" aria-pressed="false">Celular</button>
+  </div>
+
+  <div class="cmp-sum"><span id="cmp-count" aria-live="polite"></span><span>Montos en pesos argentinos por mes, salvo que se indique otra duración.</span></div>
+  <div class="cmp-grid" id="cmp-grid"></div>
+
+  <div class="cmp-note"><b>Antes de contratar:</b> el precio promocional no siempre es el precio final que paga cualquier cliente. Puede depender del domicilio, el medio de pago, la portabilidad, la contratación online o de tener otro servicio de la compañía. Las tarifas cambian: confirmá las condiciones en la fuente oficial antes de decidir. Si un dato no está verificado en una página oficial, se indica.</div>
+
+  <div class="cmp-how">
+    <div class="glass"><h3>Precio promocional</h3><p>Cuánto cuesta durante la oferta y por cuánto tiempo se mantiene.</p></div>
+    <div class="glass"><h3>Precio de lista</h3><p>Referencia publicada sin la bonificación, cuando la compañía la informa.</p></div>
+    <div class="glass"><h3>Qué incluye</h3><p>Velocidad, gigas, canales y suscripciones. “Disponible como adicional” no significa “incluido”.</p></div>
+  </div>
+
+  <div class="final">
+    <svg class="mgo mg" width="96" height="96" aria-hidden="true"><use href="#mango"/></svg>
+    <h2>¿Ya tenés alguno de estos servicios?</h2>
+    <p>Subí tu factura y buscamos una mejor promoción. Si no ahorrás, no pagás.</p>
+    <a class="btn btn-primary" href="#registro">Subir mi factura gratis</a>
+  </div>
+
+  <p class="law">Comparador informativo con valores de referencia. Las marcas y nombres pertenecen a sus titulares; Manguito no es una compañía de telecomunicaciones ni las representa. © 2026 Manguito.</p>
+</div></div>
 
 <!-- Auth -->
 <div id="v-auth" hidden><div class="wrap auth">
@@ -1387,11 +1478,11 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
   /* ---------- routing ---------- */
   function route(){
     var h=location.hash.replace('#','');
-    var view=AUTH[h]?'auth':(h==='portal'?'portal':'home');
+    var view=AUTH[h]?'auth':(h==='portal'?'portal':(h==='comparador'?'comparador':'home'));
     document.body.setAttribute('data-view',view);
-    $('landing').hidden=view!=='home';$('v-auth').hidden=view!=='auth';$('v-portal').hidden=view!=='portal';
+    $('landing').hidden=view!=='home';$('v-auth').hidden=view!=='auth';$('v-portal').hidden=view!=='portal';$('v-comparador').hidden=view!=='comparador';
     if(view==='auth')setAuth(h);else authCur=null;
-    var ex=$('nav-exit');if(ex){ex.innerHTML=view==='auth'?'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>Volver':'Salir'}
+    var ex=$('nav-exit');if(ex){ex.innerHTML=(view==='auth'||view==='comparador')?'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>Volver':'Salir'}
     if(view==='portal'){$('p-name').textContent=userName||'Tu cuenta';$('p-av').textContent=(userName||'M').charAt(0).toUpperCase();$('p-hello').textContent='Hola'+(userName?', '+userName.split(' ')[0]:'');enterPortal()}
     if(view==='home'){var el=h&&document.getElementById(h);if(el&&h!=='top'){el.scrollIntoView()}else{window.scrollTo(0,0)}}
     else{window.scrollTo(0,0)}
@@ -1892,3 +1983,66 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
 })();
 </script>
 
+<script>
+/* ---- comparador de precios ---- */
+(function(){
+  var plans=[
+{company:"Personal Flow",type:"Internet",name:"Internet 300 MB",price:27000,list:91860,verified:true,desc:"Fibra para el hogar, subida y bajada de hasta 300 Mb.",features:["Hasta 300 Mb simétricos","Instalación sin costo","Soporte técnico 24/7","71% de descuento por 6 meses"],duration:"Promoción por 6 meses",speed:300,url:"https://www.personal.com.ar/internet",source:"Personal · Internet hogar"},
+{company:"Personal Flow",type:"Internet",name:"Internet 600 MB",price:31000,list:107700,verified:true,desc:"Conexión de fibra para hogares con mayor demanda.",features:["Hasta 600 Mb simétricos","Instalación sin costo","Soporte técnico 24/7","72% de descuento por 6 meses"],duration:"Promoción por 6 meses",speed:600,url:"https://www.personal.com.ar/internet",source:"Personal · Internet hogar"},
+{company:"Personal Flow",type:"Internet",name:"Internet 300 MB + Flow Full",price:39000,list:133420,verified:true,desc:"Internet hogar más televisión y contenidos.",features:["Internet de hasta 300 Mb","Flow Full incluido en el combo","Contenidos y suscripciones","2 pantallas en simultáneo"],duration:"Promoción por 6 meses",speed:300,url:"https://www.personal.com.ar/internet",source:"Personal · combo hogar"},
+{company:"Personal Flow",type:"TV",name:"Flow Full",price:null,list:null,verified:true,desc:"Televisión y contenido en vivo, a demanda y en aplicaciones.",features:["TV en vivo y contenidos","2 pantallas simultáneas","Packs adicionales disponibles","Precio vigente: consultar la web oficial"],url:"https://www.personal.com.ar/flow/planes",source:"Flow · planes de TV",pending:true},
+{company:"Personal Flow",type:"Streaming",name:"Packs de streaming de Flow",price:null,list:null,verified:true,desc:"Suscripciones opcionales que se agregan al servicio.",features:["HBO Pack","Universal+","Disney+ y Pack Fútbol disponibles como adicionales","No asumir que están incluidos en todos los planes"],url:"https://www.personal.com.ar/flow/planes",source:"Flow · packs y adicionales",pending:true},
+{company:"Claro",type:"Internet",name:"Claro Fibra 200 Mb",price:14999,list:55289,verified:false,desc:"Internet de fibra con línea fija, sujeto a cobertura.",features:["200 Mb simétricos según oferta publicada","Módem e instalación informados sin cargo","Un mes gratis informado en la oferta","Confirmar promoción en el sitio oficial"],duration:"Condiciones a confirmar",speed:200,url:"https://www.claro.com.ar/personas/internet-wifi-telefonia-tv",source:"Claro · verificar tarifa oficial",pending:true},
+{company:"Claro",type:"Internet",name:"Claro Fibra 500 Mb",price:17999,list:65289,verified:false,desc:"Internet de fibra con línea fija, sujeto a cobertura.",features:["500 Mb simétricos según oferta publicada","Módem e instalación informados sin cargo","Un mes gratis informado en la oferta","Confirmar promoción en el sitio oficial"],duration:"Condiciones a confirmar",speed:500,url:"https://www.claro.com.ar/personas/internet-wifi-telefonia-tv",source:"Claro · verificar tarifa oficial",pending:true},
+{company:"Claro",type:"Internet",name:"Claro Fibra 800 Mb",price:22999,list:81956,verified:false,desc:"Internet de fibra con línea fija, sujeto a cobertura.",features:["800 Mb según oferta relevada","Línea fija incluida en la oferta","Cobertura y requisitos por domicilio","Confirmar precio y vigencia con Claro"],duration:"Condiciones a confirmar",speed:800,url:"https://www.claro.com.ar/personas/internet-wifi-telefonia-tv",source:"Claro · verificar tarifa oficial",pending:true},
+{company:"Claro",type:"TV",name:"Claro TV HD",price:null,list:null,verified:false,desc:"Televisión como servicio o adicional según disponibilidad.",features:["Consultar grilla de canales","Consultar costo de equipos e instalación","No se confirma aquí un precio vigente","Verificar disponibilidad y combo en Claro"],url:"https://www.claro.com.ar/personas/internet-wifi-telefonia-tv",source:"Claro · confirmar precio oficial",pending:true},
+{company:"Claro",type:"Celular",name:"Planes móviles Claro",price:null,list:null,verified:false,desc:"Planes móviles con condiciones según línea y promoción.",features:["GB y llamadas dependen del plan","Consultar roaming y apps incluidas","Precio vigente no confirmado en esta ficha","Revisar oferta oficial"],url:"https://www.claro.com.ar/personas",source:"Claro · planes móviles",pending:true},
+{company:"DirecTV",type:"Internet",name:"Fibra 200 Mb",price:37890,list:75780,verified:true,desc:"Fibra óptica con velocidad simétrica e internet ilimitado.",features:["200 Mb simétricos","Internet ilimitado","50% de descuento por 4 meses","La oferta publicada requiere tarjeta de crédito"],duration:"50% por 4 meses con tarjeta de crédito",speed:200,url:"https://www.directvla.com/ar/servicios/internet",source:"DirecTV · Internet"},
+{company:"DirecTV",type:"Internet",name:"Fibra 500 Mb",price:40678,list:81355,verified:true,desc:"Fibra óptica con velocidad simétrica e internet ilimitado.",features:["500 Mb simétricos","Internet ilimitado","50% de descuento por 4 meses","La oferta publicada requiere tarjeta de crédito"],duration:"50% por 4 meses con tarjeta de crédito",speed:500,url:"https://www.directvla.com/ar/servicios/internet",source:"DirecTV · Internet"},
+{company:"DirecTV",type:"TV",name:"TV satelital Flex 1",price:39900,list:53200,verified:true,desc:"Televisión satelital con selección de contenido premium flexible.",features:["Más de 20 canales según la ficha","1 premium flexible a elección","DGO y Prime Video indicados en el comparador","25% de descuento por 12 meses con tarjeta"],duration:"25% por 12 meses con tarjeta de crédito",url:"https://www.directvla.com/ar/pdf/comparador-planes.html",source:"DirecTV · comparador oficial"},
+{company:"DirecTV",type:"Streaming",name:"DGO · Plan Streaming",price:35200,list:null,verified:true,desc:"Plan de streaming con deportes, películas y series.",features:["Prime Video","Disney+ Premium","HBO Max","NFL Game Pass"],url:"https://www.directvgo.com/ar/",source:"DGO · planes",pending:false},
+{company:"Telecentro",type:"Internet",name:"Internet Premium 300 Mb + telefonía",price:13999,list:31998,verified:true,desc:"Internet hogar combinado con telefonía.",features:["300 Mb","Telefonía incluida en el paquete","Un mes sin cargo y descuento informado en ENACOM","Confirmar oferta online y disponibilidad"],duration:"Oferta según condiciones comerciales",speed:300,url:"https://www.telecentro.com.ar/",source:"Telecentro · tarifa contrastada con ENACOM",pending:true},
+{company:"Telecentro",type:"Internet",name:"Internet 1000 Mb + telefonía",price:24999,list:36665,verified:true,desc:"Paquete de alta velocidad con telefonía.",features:["1000 Mb","Telefonía incluida en el paquete","Promoción informada para contratación online","Confirmar precio y duración en Telecentro"],duration:"Oferta según condiciones comerciales",speed:1000,url:"https://www.telecentro.com.ar/",source:"Telecentro · tarifa contrastada con ENACOM",pending:true},
+{company:"iPlan",type:"Internet",name:"iPlan Hogar 500 Mb",price:null,list:null,verified:false,desc:"Plan de fibra sujeto a cobertura.",features:["Consultar velocidad y simetría del plan","Consultar precio promocional vigente","Verificar cobertura por domicilio","No se muestra tarifa sin confirmación oficial"],url:"https://www.iplan.com.ar/hogar",source:"iPlan · confirmar tarifa oficial",pending:true},
+{company:"iPlan",type:"Internet",name:"iPlan Hogar 800 Mb",price:null,list:null,verified:false,desc:"Plan de fibra sujeto a cobertura.",features:["Consultar velocidad y simetría del plan","Consultar precio promocional vigente","Verificar cobertura por domicilio","No se muestra tarifa sin confirmación oficial"],url:"https://www.iplan.com.ar/hogar",source:"iPlan · confirmar tarifa oficial",pending:true}
+];
+  var COLORS={'Personal Flow':'#16D6A0','Claro':'#F2402C','DirecTV':'#2DB6FF','Telecentro':'#2DB6FF','iPlan':'#F2402C'};
+  var q=document.getElementById('cmp-q'),co=document.getElementById('cmp-company'),od=document.getElementById('cmp-order');
+  var grid=document.getElementById('cmp-grid'),count=document.getElementById('cmp-count');
+  var tabs=[].slice.call(document.querySelectorAll('.cmp-tab'));
+  if(!q||!co||!od||!grid||!count)return;
+  var type='Todos';
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function money(n){return n==null?'Consultar':n.toLocaleString('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0})}
+  function unknown(f){var t=f.toLowerCase();return t.indexOf('confirmar')>-1||t.indexOf('consultar')>-1||t.indexOf('no se confirma')>-1||t.indexOf('no se muestra')>-1||t.indexOf('no asumir')>-1}
+  function card(p){
+    var pill=p.pending?['wait','Verificar condiciones']:(p.verified?['go','Fuente consultada']:['wait','A confirmar']);
+    var priced=p.price!=null;
+    var list=p.list!=null?'Precio de lista informado: <s>'+money(p.list)+'</s>':(priced?'Precio de lista: no confirmado':'Sin tarifa confirmada: consultá la web oficial');
+    return '<article class="glass cmp-card">'
+      +'<div class="cmp-top"><span class="cmp-prov" style="--c:'+(COLORS[p.company]||'#FF9A1F')+'">'+esc(p.company)+'</span><span class="pill '+pill[0]+'">'+pill[1]+'</span></div>'
+      +'<div><h3>'+esc(p.name)+'</h3><p class="cmp-desc">'+esc(p.desc)+'</p></div>'
+      +'<div><div class="cmp-price"><b'+(priced?'':' class="none"')+'>'+money(p.price)+'</b>'+(priced?'<span>/ mes</span>':'')+'</div><div class="cmp-list">'+list+'</div></div>'
+      +'<ul class="cmp-feat">'+p.features.map(function(f){return '<li'+(unknown(f)?' class="unk"':'')+'>'+esc(f)+'</li>'}).join('')+'</ul>'
+      +(p.duration?'<p class="cmp-promo"><b>Promoción:</b> '+esc(p.duration)+'</p>':'')
+      +'<div class="cmp-foot"><span class="cmp-src">Fuente: '+esc(p.source)+'</span><a class="btn btn-ghost" href="'+esc(p.url)+'" target="_blank" rel="noopener noreferrer">Ver oferta oficial</a></div>'
+      +'</article>';
+  }
+  function render(){
+    var term=q.value.trim().toLocaleLowerCase('es-AR'),c=co.value,o=od.value;
+    var rows=plans.filter(function(p){
+      return (type==='Todos'||p.type===type)&&(!c||p.company===c)&&(!term||(p.name+' '+p.company+' '+p.desc+' '+p.features.join(' ')).toLocaleLowerCase('es-AR').indexOf(term)>-1);
+    });
+    if(o==='price')rows.sort(function(a,b){return (a.price==null?Infinity:a.price)-(b.price==null?Infinity:b.price)});
+    if(o==='speed')rows.sort(function(a,b){return (b.speed||0)-(a.speed||0)});
+    count.textContent=rows.length+' '+(rows.length===1?'plan encontrado':'planes encontrados')+' · valores de referencia, no cotización personalizada';
+    grid.innerHTML=rows.length?rows.map(card).join(''):'<div class="cmp-empty">No encontramos planes con esos filtros. Probá otra búsqueda o elegí “Todas las compañías”.</div>';
+  }
+  tabs.forEach(function(b){b.addEventListener('click',function(){
+    tabs.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+    type=b.getAttribute('data-type');render();
+  })});
+  q.addEventListener('input',render);co.addEventListener('change',render);od.addEventListener('change',render);
+  render();
+})();
+</script>
