@@ -628,7 +628,7 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
 /* botón verde de pagar comisión */
 .btn-pay{position:relative;overflow:hidden;isolation:isolate;color:#04160C;background:linear-gradient(110deg,#7CF5B5,#2BC873 40%,#14AA5B 65%,#7CF5B5);background-size:220% 100%;box-shadow:0 12px 30px -10px rgba(39,196,111,.85),inset 0 1px 0 rgba(255,255,255,.55);transition:transform .15s,filter .15s;animation:payBg 4s ease-in-out infinite alternate,payGlow 1.9s ease-in-out infinite}
 .btn-pay::after{content:"";position:absolute;top:-30%;bottom:-30%;left:-70%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.85),transparent);transform:skewX(-20deg);animation:paySweep 2.8s ease-in infinite;z-index:-1}
-.btn-pay:hover{transform:translateY(-2px) scale(1.04);filter:brightness(1.07)}.btn-pay:active{transform:scale(.97)}
+.btn-pay:hover{filter:brightness(1.07)}.btn-pay:hover::after{animation-duration:1.15s}.btn-pay:active{filter:brightness(.95)}
 @keyframes payBg{to{background-position:100% 0}}
 @keyframes paySweep{0%{left:-70%}55%,100%{left:140%}}
 @keyframes payGlow{0%,100%{box-shadow:0 12px 30px -10px rgba(39,196,111,.85),0 0 0 0 rgba(74,222,150,.6),inset 0 1px 0 rgba(255,255,255,.55)}60%{box-shadow:0 14px 36px -8px rgba(39,196,111,1),0 0 0 14px rgba(74,222,150,0),inset 0 1px 0 rgba(255,255,255,.55)}}
@@ -724,6 +724,82 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
 .cmp-how>div{padding:1.2rem;display:grid;gap:.4rem;align-content:start;backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--glass)}
 .cmp-how p{color:var(--muted);font-size:.9rem}
 .cpx .final{justify-self:stretch;width:100%;margin-top:.6rem}
+
+/* ---------- ticket de pago ---------- */
+#m-bonif{overflow-y:auto;align-items:safe center}
+.mbox.ptb{max-width:25rem;padding:0;background:none;border:0;box-shadow:none;overflow:visible;max-height:none;gap:.8rem;animation:ptIn .55s cubic-bezier(.2,.9,.25,1) both}
+@keyframes ptIn{from{opacity:0;transform:translateY(26px) scale(.96)}to{opacity:1;transform:none}}
+.ptx{justify-self:end}
+.ptk{--r:.95rem;color:#17130e;filter:drop-shadow(0 26px 36px rgba(0,0,0,.55))}
+.pt-a,.pt-b{position:relative;background:#fff}
+.pt-a{padding:1.7rem 1.5rem 1.4rem;text-align:center;border-radius:1.5rem 1.5rem 0 0;
+  -webkit-mask:radial-gradient(circle var(--r) at 0 100%,#0000 97%,#000),radial-gradient(circle var(--r) at 100% 100%,#0000 97%,#000);-webkit-mask-composite:source-in;
+  mask:radial-gradient(circle var(--r) at 0 100%,#0000 97%,#000),radial-gradient(circle var(--r) at 100% 100%,#0000 97%,#000);mask-composite:intersect}
+.pt-b{padding:1.5rem 1.5rem 2.2rem;display:grid;gap:1rem;
+  -webkit-mask:radial-gradient(circle var(--r) at 0 0,#0000 97%,#000),radial-gradient(circle var(--r) at 100% 0,#0000 97%,#000),radial-gradient(circle .6rem at 50% 100%,#0000 97%,#000) 0 0/2rem 100% round no-repeat;-webkit-mask-composite:source-in,source-in;
+  mask:radial-gradient(circle var(--r) at 0 0,#0000 97%,#000),radial-gradient(circle var(--r) at 100% 0,#0000 97%,#000),radial-gradient(circle .6rem at 50% 100%,#0000 97%,#000) 0 0/2rem 100% round no-repeat;mask-composite:intersect,intersect}
+.pt-b::before{content:"";position:absolute;left:1.7rem;right:1.7rem;top:-1px;border-top:2px dashed #cfc9bd}
+.pt-em{font-size:2.9rem;line-height:1;display:inline-block;animation:ptPop .8s .25s cubic-bezier(.3,1.6,.4,1) both}
+@keyframes ptPop{from{transform:scale(.3) rotate(-25deg);opacity:0}to{transform:none;opacity:1}}
+.pt-a h3{font-size:1.5rem;margin:.7rem 0 .35rem;font-weight:800;color:#14110d;letter-spacing:-.03em}
+.pt-a p{font-size:.9rem;color:#6f695e;line-height:1.45;max-width:19rem;margin-inline:auto}
+.pt-g{display:grid;grid-template-columns:1fr auto;gap:1.05rem 1rem}
+.pt-g small,.pt-sv small{display:block;font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;color:#8a8478;font-family:var(--f-mono)}
+.pt-g b{font-size:1rem;font-weight:600;color:#17130e}.pt-g div:nth-child(3) b{white-space:nowrap;font-size:.95rem}
+.pt-g .r{text-align:right}
+.pt-sv{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem .6rem;padding:.8rem .9rem;border-radius:1rem;background:#f1f9f4;border:1px solid #cdebd9}
+.pt-sv b{display:block;font-family:var(--f-display);font-size:.95rem;color:#17130e;letter-spacing:-.02em}
+.pt-sv b.g{color:#0f7a43}
+.pt-sv .pt-ln{grid-column:1/-1;font-size:.78rem;color:#6f695e;line-height:1.35}
+.pt-pay{display:flex;align-items:center;gap:.8rem;width:100%;padding:.8rem .9rem;border-radius:1rem;border:1px solid #e6e3dc;background:#f6f5f1;font:inherit;color:#17130e;text-align:left;cursor:pointer;transition:border-color .2s,background .2s}
+.pt-pay:hover{border-color:#2BC873;background:#eef9f2}
+.pt-pay:focus-visible{outline:3px solid #14AA5B;outline-offset:2px}
+.pt-pay .ci{flex:none;width:2.7rem;height:2.7rem;border-radius:.85rem;display:grid;place-items:center;background:linear-gradient(135deg,#34D27E,#14AA5B);color:#fff;animation:ptRing 2.4s ease-out infinite}
+@keyframes ptRing{0%{box-shadow:0 0 0 0 rgba(43,200,115,.5)}70%,100%{box-shadow:0 0 0 .7rem rgba(43,200,115,0)}}
+.pt-pay b{display:block;font-size:.98rem;font-weight:700}
+.pt-pay small{display:block;font-size:.78rem;color:#6f695e;line-height:1.3}
+.pt-pay .ch{margin-left:auto;flex:none;color:#14AA5B;transition:transform .2s}
+.pt-pay:hover .ch{transform:translateX(3px)}
+.pt-bar{display:grid;gap:.45rem;justify-items:center;border-top:2px dashed #e4e1d9;padding-top:1.1rem;margin-top:.2rem}
+.pt-bar svg{width:86%;height:3.3rem;display:block;fill:#111}
+.pt-dg{width:86%;display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.3em;color:#3a352c}
+.mbox.ptb .btn-pay{width:100%;padding:1rem 1.4rem;font-size:1rem}
+.pt-fine{text-align:center;font-size:.78rem;color:#d9c9ad;display:flex;align-items:center;justify-content:center;gap:.4rem}
+@media(prefers-reduced-motion:reduce){.mbox.ptb,.pt-em,.pt-pay .ci{animation:none}}
+/* ---------- login: recordarme y olvidé mi contraseña ---------- */
+.lrow{display:flex;justify-content:space-between;align-items:center;gap:.4rem 1rem;flex-wrap:wrap}
+.rem{position:relative;display:inline-flex;align-items:center;gap:.55rem;font-size:.86rem;font-weight:600;color:var(--muted);cursor:pointer;user-select:none}
+.rem:hover{color:var(--fg)}
+.rem input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.rem .bx{width:1.2rem;height:1.2rem;flex:none;border-radius:.4rem;border:1.5px solid rgba(255,226,180,.4);background:rgba(255,255,255,.06);display:grid;place-items:center;transition:background .15s,border-color .15s}
+.rem .bx::after{content:"";width:.3rem;height:.58rem;border:solid var(--ink);border-width:0 2.5px 2.5px 0;transform:rotate(45deg) scale(0);margin-top:-.12rem;transition:transform .15s}
+.rem input:checked+.bx{background:var(--sun);border-color:transparent}
+.rem input:checked+.bx::after{transform:rotate(45deg) scale(1)}
+.rem input:focus-visible+.bx{outline:3px solid var(--yellow);outline-offset:2px}
+.lnk{font:inherit;font-size:.86rem;font-weight:600;background:none;border:0;padding:.2rem 0;color:var(--yellow);cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,203,61,.4)}
+.lnk:hover{text-decoration-color:currentColor}
+.lnk:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;border-radius:.3rem}
+.acard.fg .tabs{display:none}
+.okm{padding:.75rem .9rem;border-radius:.95rem;background:var(--leaf-soft);border:1px solid rgba(74,222,150,.4);color:var(--fg);font-size:.86rem}
+/* ---------- verificación en dos pasos: QR ---------- */
+.qr{width:11.5rem;max-width:100%;margin-inline:auto;padding:.4rem;border-radius:1rem;background:#fff;box-shadow:0 14px 30px -14px rgba(0,0,0,.8),0 0 0 3px rgba(255,203,61,.35)}
+.qr svg{display:block;width:100%;height:auto;border-radius:.6rem}
+/* ---------- inicio: cómo crece tu ahorro ---------- */
+.ah-svg{display:block;width:100%;height:auto;touch-action:pan-y}
+.ah-svg text{font-family:var(--f-mono);font-size:9.5px;fill:var(--faint)}
+.ah-l{display:flex;gap:.4rem 1.2rem;flex-wrap:wrap;font-size:.76rem;color:var(--muted)}
+.ah-l span{display:inline-flex;align-items:center;gap:.4rem}
+.ah-l i{display:inline-block;width:1rem;height:.2rem;border-radius:2px;background:var(--sun)}
+.ah-l i.d{background:repeating-linear-gradient(90deg,var(--leaf) 0 4px,transparent 4px 7px)}
+.ah-area{animation:fade .6s .9s both}
+.ah-svg.still .ah-area,.ah-svg.still .line-a{animation:none}
+.ah-svg.still .line-a{stroke-dashoffset:0}
+.ah-f{display:grid;grid-template-columns:repeat(auto-fit,minmax(8rem,1fr));gap:.6rem}
+.ah-f>div{padding:.6rem .8rem;border-radius:.9rem;background:var(--mango-soft);border:1px solid rgba(255,154,31,.4)}
+.ah-f small{display:block;color:var(--muted);font-size:.72rem}
+.ah-f b{font-family:var(--f-display);font-size:1.1rem;color:var(--yellow)}
+.ah-f>div.g{background:var(--leaf-soft);border-color:rgba(74,222,150,.4)}.ah-f>div.g b{color:var(--leaf)}
+@media(prefers-reduced-motion:reduce){.ah-area{animation:none}}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -742,7 +818,7 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
   <div class="nav-in glass">
     <a class="brand" href="#top"><svg class="mgo" width="32" height="32" aria-hidden="true"><use href="#mango"/></svg>Manguito</a>
     <div class="links only-home"><a href="#como">Cómo funciona</a><a href="#calculadora">Calculadora</a><a href="#comparador">Comparador</a><a href="#precios">Precios</a><a href="#seguridad">Seguridad</a><a href="#faq">Preguntas</a></div>
-    <div class="only-home"><a class="btn btn-primary btn-shine" href="#registro">Empezar gratis</a></div>
+    <div class="only-home"><a class="btn btn-primary btn-shine" href="#registro" id="nav-cta">Empezar gratis</a></div>
     <div class="only-app"><a class="btn btn-ghost" href="#top" id="nav-exit">Salir</a></div>
   </div>
 </div></nav>
@@ -1027,8 +1103,17 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
             <svg class="on" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
             <svg class="off" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18M10.6 5.1A10.700 10.700 0 0 1 12 5c6 0 10 7 10 7a17 17 0 0 1-3.200 4M6.600 6.600A17 17 0 0 0 2 12s4 7 10 7c1.700 0 3.200-.5 4.500-1.200M9.900 9.900a3 3 0 0 0 4.200 4.200"/></svg>
           </button></div></div>
+      <div class="lrow"><label class="rem"><input type="checkbox" id="l-rem"><span class="bx" aria-hidden="true"></span>Recordarme</label><button type="button" class="lnk" id="l-forgot">¿Olvidaste tu contraseña?</button></div>
       <p class="err" id="l-err" role="alert"></p>
       <button class="btn btn-primary" type="submit">Iniciar sesión</button>
+    </form>
+
+    <form id="f-forgot" hidden novalidate>
+      <div class="af"><label for="fg-mail">Email de tu cuenta</label><input type="email" id="fg-mail" placeholder="tu@email.com" autocomplete="email"></div>
+      <p class="err" id="fg-err" role="alert"></p>
+      <p class="okm" id="fg-ok" role="status" hidden></p>
+      <button class="btn btn-primary" type="submit" id="fg-btn">Enviar enlace</button>
+      <button class="btn btn-ghost" type="button" id="fg-back">Volver a iniciar sesión</button>
     </form>
 
     <form id="f-reg" hidden novalidate>
@@ -1090,6 +1175,16 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
         <div class="kpi glass"><small>Manguito Plus</small><b id="k-plan">Inactivo</b><small>Pensado para 2 o más servicios</small></div>
       </div>
       <div class="gest glass" id="hero"></div>
+      <div class="gest glass" id="ahorro">
+        <div class="gest-h"><div><h3>Tu ahorro va creciendo</h3><p class="mut" id="ah-sub">Proyección de tu ahorro acumulado en los próximos 6 meses.</p></div><span class="pill go" id="ah-pill">Estimado</span></div>
+        <div id="ah-body">
+          <svg class="ah-svg" id="ah-svg" viewBox="0 0 320 170" role="img" aria-label="Gráfico de tu ahorro acumulado"></svg>
+          <div class="ah-l"><span><i></i>Con tus descuentos activos</span><span id="ah-l2"><i class="d"></i>Sumando las gestiones en curso</span></div>
+          <p class="chart-note" id="ah-note" aria-live="polite"></p>
+          <div class="ah-f"><div><small>Ahorro por mes (activo)</small><b id="ah-m">$0</b></div><div><small>Acumulado en 6 meses</small><b id="ah-t">$0</b></div><div class="g" id="ah-pt"><small>Con gestiones en curso</small><b id="ah-p">$0</b></div></div>
+        </div>
+        <p class="fine" id="ah-empty" hidden>Todavía no hay descuentos para mostrar. Subí una factura y empezá a ahorrar: acá vas a ver cómo crece tu ahorro mes a mes.</p>
+      </div>
       <div class="gest glass" id="ult"><div class="gest-h"><h3>Últimas gestiones</h3><span class="pill new" id="ult-n"></span></div><div class="list" id="ult-l"></div><button class="btn btn-ghost sm" type="button" id="ult-more" hidden style="justify-self:start"></button></div>
       <div class="two">
         <div class="glass rowc"><span class="ico" data-i="file" data-s="20"></span><div><b>¿Sumamos una factura nueva?</b><small>La revisamos y negociamos tu ahorro.</small></div><button class="btn btn-primary" type="button" data-act="goup">Subir</button></div>
@@ -1134,7 +1229,6 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
         <div>
           <button class="lk" type="button" data-act="pwd"><span data-i="lock"></span>Cambiar contraseña<span class="sp"></span><span data-i="right"></span></button>
           <button class="lk" type="button" data-act="2fa"><span data-i="shield"></span><span>Verificación en dos pasos<small class="mut" id="tf-s">Desactivada</small></span><span class="sp"></span><span class="pill wait" id="tf-p">Configurar</span></button>
-          <div class="lk"><span data-i="user"></span><span>Activar Face ID<small class="mut" id="fid-s">Desactivado</small></span><button type="button" class="sw" id="fid" role="switch" aria-checked="false" aria-label="Activar Face ID" data-act="fid"></button></div>
         </div>
         <div class="scam" role="note"><b>Cuidate de las estafas</b><p>Manguito nunca te va a llamar ni a pedirte tus claves, el token o los códigos que recibís por SMS. Tampoco te vamos a pedir que transfieras dinero para «proteger tu cuenta». Si alguien lo hace, cortá: es una estafa. Contanos únicamente desde <a href="https://wa.me/5491158214819?text=Hola,%20quiero%20reportar%20un%20intento%20de%20estafa" target="_blank" rel="noopener noreferrer">Soporte</a>.</p></div>
       </div>
@@ -1147,14 +1241,40 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
   </div>
 </div></div></div>
 <div class="modal" id="m-ticket"><div class="mbox"><div class="mhead"><h3 id="mt-title">Detalle de la gestión</h3><button class="x" type="button" data-act="close" data-m="m-ticket" aria-label="Cerrar"><span data-i="close"></span></button></div><div id="mt-body" class="pmain"></div></div></div>
-<div class="modal" id="m-bonif"><div class="mbox">
-  <div class="mhead"><h3>Resumen de tu bonificación</h3><button class="x" type="button" data-act="close" data-m="m-bonif" aria-label="Cerrar"><span data-i="close"></span></button></div>
-  <div class="cmp"><div class="b"><small>Monto original</small><b id="bf-a">–</b></div><span class="ar" aria-hidden="true">→</span><div class="b now"><small>Monto con descuento</small><b id="bf-b">–</b></div></div>
-  <div><p class="mut" style="text-align:center">Total ahorrado</p><div class="big" id="bf-t">–</div><p class="fine" style="text-align:center;margin:.2rem 0 0" id="bf-s"></p></div>
-  <ol class="track" style="grid-template-columns:repeat(3,1fr)"><li class="done">Proceso completado</li><li class="now">Pago de comisión pendiente</li><li>Descuento aplicado</li></ol>
-  <div class="info"><div><b>Comisión única (<span id="bf-p">10</span>% del ahorro total)</b><br>Tu pago: <b id="bf-c">–</b> · un solo pago sobre tus <span id="bf-t2"></span> de ahorro</div></div>
-  <div class="fee"><div><small>Ahorro neto total (después de comisión)</small><b id="bf-n">–</b></div></div>
+<div class="modal" id="m-bonif"><div class="mbox ptb" role="dialog" aria-modal="true" aria-labelledby="pt-h">
+  <button class="x ptx" type="button" data-act="close" data-m="m-bonif" aria-label="Cerrar"><span data-i="close"></span></button>
+  <div class="ptk">
+    <div class="pt-a">
+      <div class="pt-em" aria-hidden="true">🎉</div>
+      <h3 id="pt-h">¡Tu ticket está listo!</h3>
+      <p>Abonando la comisión aplicamos tu descuento en la factura.</p>
+    </div>
+    <div class="pt-b">
+      <div class="pt-g">
+        <div><small>N.º de ticket</small><b id="pt-id">–</b></div>
+        <div class="r"><small>Importe</small><b id="pt-amt">–</b></div>
+        <div><small>Fecha y hora</small><b id="pt-dt">–</b></div>
+        <div class="r"><small>Compañía</small><b id="pt-co">–</b></div>
+      </div>
+      <div class="pt-sv">
+        <div><small>Ahorro total</small><b class="g" id="pt-tot">–</b></div>
+        <div><small>Comisión <span id="pt-pct">10</span>%</small><b id="pt-com">–</b></div>
+        <div><small>Ahorro neto</small><b class="g" id="pt-net">–</b></div>
+        <p class="pt-ln" id="pt-ln"></p>
+      </div>
+      <button class="pt-pay" type="button" data-act="pay" id="pt-payrow" aria-label="Tocá acá para pagar con Ualá">
+        <span class="ci" data-i="card" data-s="22"></span>
+        <span><b>Pagar con Ualá</b><small>Tocá acá para elegir tu tarjeta y pagar</small></span>
+        <span class="ch" data-i="right"></span>
+      </button>
+      <div class="pt-bar">
+        <svg id="pt-bars" viewBox="0 0 250 60" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <div class="pt-dg" id="pt-dg" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
   <button class="btn btn-pay" type="button" data-act="pay" id="bf-btn">Pagar con Ualá</button>
+  <p class="pt-fine"><span data-i="lock" data-s="14"></span>Te llevamos a la pasarela de pago segura de Ualá.</p>
 </div></div>
 <div class="modal" id="m-2fa"><div class="mbox">
   <div class="mhead"><h3>Verificación en dos pasos</h3><button class="x" type="button" data-act="close" data-m="m-2fa" aria-label="Cerrar"><span data-i="close"></span></button></div>
@@ -1162,7 +1282,9 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
     <button class="glass rowc" type="button" data-act="tf-app"><span class="ico" data-i="shield" data-s="20"></span><div><b>Google Authenticator</b><small>Códigos de 6 dígitos desde la app en tu celular</small></div><span data-i="right"></span></button>
     <button class="glass rowc" type="button" data-act="tf-mail"><span class="ico" data-i="mail" data-s="20"></span><div><b>Código por email</b><small>Lo recibís en Gmail, Outlook u otra casilla</small></div><span data-i="right"></span></button></div>
   <div id="tf-appp" class="pmain" hidden>
-    <p class="mut">1. Abrí Google Authenticator, tocá «+» y elegí «Ingresar clave de configuración» (cuenta: Manguito, tipo: basada en tiempo).<br>2. Ingresá esta clave:</p>
+    <p class="mut">1. Abrí Google Authenticator y tocá «+».<br>2. Elegí «Escanear código QR» y apuntá la cámara a este código:</p>
+    <div class="qr" id="tf-qr"></div>
+    <p class="mut" style="text-align:center">¿No podés escanear? Elegí «Ingresar clave de configuración» (cuenta: Manguito, basada en tiempo) y escribí esta clave:</p>
     <div class="key" id="tf-key"></div>
     <div class="cta"><button class="btn btn-ghost sm" type="button" data-act="tf-copy">Copiar clave</button><a class="btn btn-ghost sm" id="tf-link" href="#">Abrir en Authenticator</a></div>
     <label>3. Ingresá el código de 6 dígitos que muestra la app<input type="text" id="tf-code" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="000000"></label>
@@ -1194,6 +1316,1200 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
 </div></div>
 <div class="toast" id="toast" role="status" hidden></div>
 
+<script>
+/* Generador de QR: QRCode for JavaScript (c) 2009 Kazuhiko Arase, licencia MIT (http://www.opensource.org/licenses/mit-license.php). "QR Code" es marca registrada de DENSO WAVE INCORPORATED. */
+var MGQR=(function(){var M={},C={};function R(n){n=n.replace("./","");if(C[n])return C[n].exports;var m=C[n]={exports:{}};M[n](m,m.exports,R);return m.exports}
+M["QRMode"]=function(module,exports,require){module.exports = {
+    MODE_NUMBER :       1 << 0,
+    MODE_ALPHA_NUM :    1 << 1,
+    MODE_8BIT_BYTE :    1 << 2,
+    MODE_KANJI :        1 << 3
+};
+
+};
+M["QRErrorCorrectLevel"]=function(module,exports,require){module.exports = {
+	L : 1,
+	M : 0,
+	Q : 3,
+	H : 2
+};
+
+
+};
+M["QRMaskPattern"]=function(module,exports,require){module.exports = {
+	PATTERN000 : 0,
+	PATTERN001 : 1,
+	PATTERN010 : 2,
+	PATTERN011 : 3,
+	PATTERN100 : 4,
+	PATTERN101 : 5,
+	PATTERN110 : 6,
+	PATTERN111 : 7
+};
+
+};
+M["QRMath"]=function(module,exports,require){var QRMath = {
+
+	glog : function(n) {
+	
+		if (n < 1) {
+			throw new Error("glog(" + n + ")");
+		}
+		
+		return QRMath.LOG_TABLE[n];
+	},
+	
+	gexp : function(n) {
+	
+		while (n < 0) {
+			n += 255;
+		}
+	
+		while (n >= 256) {
+			n -= 255;
+		}
+	
+		return QRMath.EXP_TABLE[n];
+	},
+	
+	EXP_TABLE : new Array(256),
+	
+	LOG_TABLE : new Array(256)
+
+};
+	
+for (var i = 0; i < 8; i++) {
+	QRMath.EXP_TABLE[i] = 1 << i;
+}
+for (var i = 8; i < 256; i++) {
+	QRMath.EXP_TABLE[i] = QRMath.EXP_TABLE[i - 4]
+		^ QRMath.EXP_TABLE[i - 5]
+		^ QRMath.EXP_TABLE[i - 6]
+		^ QRMath.EXP_TABLE[i - 8];
+}
+for (var i = 0; i < 255; i++) {
+	QRMath.LOG_TABLE[QRMath.EXP_TABLE[i] ] = i;
+}
+
+module.exports = QRMath;
+
+};
+M["QRPolynomial"]=function(module,exports,require){var QRMath = require('./QRMath');
+
+function QRPolynomial(num, shift) {
+	if (num.length === undefined) {
+		throw new Error(num.length + "/" + shift);
+	}
+
+	var offset = 0;
+
+	while (offset < num.length && num[offset] === 0) {
+		offset++;
+	}
+
+	this.num = new Array(num.length - offset + shift);
+	for (var i = 0; i < num.length - offset; i++) {
+		this.num[i] = num[i + offset];
+	}
+}
+
+QRPolynomial.prototype = {
+
+	get : function(index) {
+		return this.num[index];
+	},
+	
+	getLength : function() {
+		return this.num.length;
+	},
+	
+	multiply : function(e) {
+	
+		var num = new Array(this.getLength() + e.getLength() - 1);
+	
+		for (var i = 0; i < this.getLength(); i++) {
+			for (var j = 0; j < e.getLength(); j++) {
+				num[i + j] ^= QRMath.gexp(QRMath.glog(this.get(i) ) + QRMath.glog(e.get(j) ) );
+			}
+		}
+	
+		return new QRPolynomial(num, 0);
+	},
+	
+	mod : function(e) {
+	
+		if (this.getLength() - e.getLength() < 0) {
+			return this;
+		}
+	
+		var ratio = QRMath.glog(this.get(0) ) - QRMath.glog(e.get(0) );
+	
+		var num = new Array(this.getLength() );
+		
+		for (var i = 0; i < this.getLength(); i++) {
+			num[i] = this.get(i);
+		}
+		
+		for (var x = 0; x < e.getLength(); x++) {
+			num[x] ^= QRMath.gexp(QRMath.glog(e.get(x) ) + ratio);
+		}
+
+		return new QRPolynomial(num, 0).mod(e);
+	}
+};
+
+module.exports = QRPolynomial;
+
+};
+M["QRRSBlock"]=function(module,exports,require){var QRErrorCorrectLevel = require('./QRErrorCorrectLevel');
+
+function QRRSBlock(totalCount, dataCount) {
+	this.totalCount = totalCount;
+	this.dataCount  = dataCount;
+}
+
+QRRSBlock.RS_BLOCK_TABLE = [
+
+
+
+
+
+	[1, 26, 19],
+	[1, 26, 16],
+	[1, 26, 13],
+	[1, 26, 9],
+
+	[1, 44, 34],
+	[1, 44, 28],
+	[1, 44, 22],
+	[1, 44, 16],
+
+	[1, 70, 55],
+	[1, 70, 44],
+	[2, 35, 17],
+	[2, 35, 13],
+
+	[1, 100, 80],
+	[2, 50, 32],
+	[2, 50, 24],
+	[4, 25, 9],
+
+	[1, 134, 108],
+	[2, 67, 43],
+	[2, 33, 15, 2, 34, 16],
+	[2, 33, 11, 2, 34, 12],
+
+	[2, 86, 68],
+	[4, 43, 27],
+	[4, 43, 19],
+	[4, 43, 15],
+
+	[2, 98, 78],
+	[4, 49, 31],
+	[2, 32, 14, 4, 33, 15],
+	[4, 39, 13, 1, 40, 14],
+
+	[2, 121, 97],
+	[2, 60, 38, 2, 61, 39],
+	[4, 40, 18, 2, 41, 19],
+	[4, 40, 14, 2, 41, 15],
+
+	[2, 146, 116],
+	[3, 58, 36, 2, 59, 37],
+	[4, 36, 16, 4, 37, 17],
+	[4, 36, 12, 4, 37, 13],
+
+	[2, 86, 68, 2, 87, 69],
+	[4, 69, 43, 1, 70, 44],
+	[6, 43, 19, 2, 44, 20],
+	[6, 43, 15, 2, 44, 16],
+
+	[4, 101, 81],
+	[1, 80, 50, 4, 81, 51],
+	[4, 50, 22, 4, 51, 23],
+	[3, 36, 12, 8, 37, 13],
+
+	[2, 116, 92, 2, 117, 93],
+	[6, 58, 36, 2, 59, 37],
+	[4, 46, 20, 6, 47, 21],
+	[7, 42, 14, 4, 43, 15],
+
+	[4, 133, 107],
+	[8, 59, 37, 1, 60, 38],
+	[8, 44, 20, 4, 45, 21],
+	[12, 33, 11, 4, 34, 12],
+
+	[3, 145, 115, 1, 146, 116],
+	[4, 64, 40, 5, 65, 41],
+	[11, 36, 16, 5, 37, 17],
+	[11, 36, 12, 5, 37, 13],
+
+	[5, 109, 87, 1, 110, 88],
+	[5, 65, 41, 5, 66, 42],
+	[5, 54, 24, 7, 55, 25],
+	[11, 36, 12],
+
+	[5, 122, 98, 1, 123, 99],
+	[7, 73, 45, 3, 74, 46],
+	[15, 43, 19, 2, 44, 20],
+	[3, 45, 15, 13, 46, 16],
+
+	[1, 135, 107, 5, 136, 108],
+	[10, 74, 46, 1, 75, 47],
+	[1, 50, 22, 15, 51, 23],
+	[2, 42, 14, 17, 43, 15],
+
+	[5, 150, 120, 1, 151, 121],
+	[9, 69, 43, 4, 70, 44],
+	[17, 50, 22, 1, 51, 23],
+	[2, 42, 14, 19, 43, 15],
+
+	[3, 141, 113, 4, 142, 114],
+	[3, 70, 44, 11, 71, 45],
+	[17, 47, 21, 4, 48, 22],
+	[9, 39, 13, 16, 40, 14],
+
+	[3, 135, 107, 5, 136, 108],
+	[3, 67, 41, 13, 68, 42],
+	[15, 54, 24, 5, 55, 25],
+	[15, 43, 15, 10, 44, 16],
+
+	[4, 144, 116, 4, 145, 117],
+	[17, 68, 42],
+	[17, 50, 22, 6, 51, 23],
+	[19, 46, 16, 6, 47, 17],
+
+	[2, 139, 111, 7, 140, 112],
+	[17, 74, 46],
+	[7, 54, 24, 16, 55, 25],
+	[34, 37, 13],
+
+	[4, 151, 121, 5, 152, 122],
+	[4, 75, 47, 14, 76, 48],
+	[11, 54, 24, 14, 55, 25],
+	[16, 45, 15, 14, 46, 16],
+
+	[6, 147, 117, 4, 148, 118],
+	[6, 73, 45, 14, 74, 46],
+	[11, 54, 24, 16, 55, 25],
+	[30, 46, 16, 2, 47, 17],
+
+	[8, 132, 106, 4, 133, 107],
+	[8, 75, 47, 13, 76, 48],
+	[7, 54, 24, 22, 55, 25],
+	[22, 45, 15, 13, 46, 16],
+
+	[10, 142, 114, 2, 143, 115],
+	[19, 74, 46, 4, 75, 47],
+	[28, 50, 22, 6, 51, 23],
+	[33, 46, 16, 4, 47, 17],
+
+	[8, 152, 122, 4, 153, 123],
+	[22, 73, 45, 3, 74, 46],
+	[8, 53, 23, 26, 54, 24],
+	[12, 45, 15, 28, 46, 16],
+
+	[3, 147, 117, 10, 148, 118],
+	[3, 73, 45, 23, 74, 46],
+	[4, 54, 24, 31, 55, 25],
+	[11, 45, 15, 31, 46, 16],
+
+	[7, 146, 116, 7, 147, 117],
+	[21, 73, 45, 7, 74, 46],
+	[1, 53, 23, 37, 54, 24],
+	[19, 45, 15, 26, 46, 16],
+
+	[5, 145, 115, 10, 146, 116],
+	[19, 75, 47, 10, 76, 48],
+	[15, 54, 24, 25, 55, 25],
+	[23, 45, 15, 25, 46, 16],
+
+	[13, 145, 115, 3, 146, 116],
+	[2, 74, 46, 29, 75, 47],
+	[42, 54, 24, 1, 55, 25],
+	[23, 45, 15, 28, 46, 16],
+
+	[17, 145, 115],
+	[10, 74, 46, 23, 75, 47],
+	[10, 54, 24, 35, 55, 25],
+	[19, 45, 15, 35, 46, 16],
+
+	[17, 145, 115, 1, 146, 116],
+	[14, 74, 46, 21, 75, 47],
+	[29, 54, 24, 19, 55, 25],
+	[11, 45, 15, 46, 46, 16],
+
+	[13, 145, 115, 6, 146, 116],
+	[14, 74, 46, 23, 75, 47],
+	[44, 54, 24, 7, 55, 25],
+	[59, 46, 16, 1, 47, 17],
+
+	[12, 151, 121, 7, 152, 122],
+	[12, 75, 47, 26, 76, 48],
+	[39, 54, 24, 14, 55, 25],
+	[22, 45, 15, 41, 46, 16],
+
+	[6, 151, 121, 14, 152, 122],
+	[6, 75, 47, 34, 76, 48],
+	[46, 54, 24, 10, 55, 25],
+	[2, 45, 15, 64, 46, 16],
+
+	[17, 152, 122, 4, 153, 123],
+	[29, 74, 46, 14, 75, 47],
+	[49, 54, 24, 10, 55, 25],
+	[24, 45, 15, 46, 46, 16],
+
+	[4, 152, 122, 18, 153, 123],
+	[13, 74, 46, 32, 75, 47],
+	[48, 54, 24, 14, 55, 25],
+	[42, 45, 15, 32, 46, 16],
+
+	[20, 147, 117, 4, 148, 118],
+	[40, 75, 47, 7, 76, 48],
+	[43, 54, 24, 22, 55, 25],
+	[10, 45, 15, 67, 46, 16],
+
+	[19, 148, 118, 6, 149, 119],
+	[18, 75, 47, 31, 76, 48],
+	[34, 54, 24, 34, 55, 25],
+	[20, 45, 15, 61, 46, 16]
+];
+
+QRRSBlock.getRSBlocks = function(typeNumber, errorCorrectLevel) {
+	
+	var rsBlock = QRRSBlock.getRsBlockTable(typeNumber, errorCorrectLevel);
+	
+	if (rsBlock === undefined) {
+		throw new Error("bad rs block @ typeNumber:" + typeNumber + "/errorCorrectLevel:" + errorCorrectLevel);
+	}
+
+	var length = rsBlock.length / 3;
+	
+	var list = [];
+	
+	for (var i = 0; i < length; i++) {
+
+		var count = rsBlock[i * 3 + 0];
+		var totalCount = rsBlock[i * 3 + 1];
+		var dataCount  = rsBlock[i * 3 + 2];
+
+		for (var j = 0; j < count; j++) {
+			list.push(new QRRSBlock(totalCount, dataCount) );	
+		}
+	}
+	
+	return list;
+};
+
+QRRSBlock.getRsBlockTable = function(typeNumber, errorCorrectLevel) {
+
+	switch(errorCorrectLevel) {
+	case QRErrorCorrectLevel.L :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+	case QRErrorCorrectLevel.M :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+	case QRErrorCorrectLevel.Q :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+	case QRErrorCorrectLevel.H :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+	default :
+		return undefined;
+	}
+};
+
+module.exports = QRRSBlock;
+
+};
+M["QRBitBuffer"]=function(module,exports,require){function QRBitBuffer() {
+	this.buffer = [];
+	this.length = 0;
+}
+
+QRBitBuffer.prototype = {
+
+	get : function(index) {
+		var bufIndex = Math.floor(index / 8);
+		return ( (this.buffer[bufIndex] >>> (7 - index % 8) ) & 1) == 1;
+	},
+	
+	put : function(num, length) {
+		for (var i = 0; i < length; i++) {
+			this.putBit( ( (num >>> (length - i - 1) ) & 1) == 1);
+		}
+	},
+	
+	getLengthInBits : function() {
+		return this.length;
+	},
+	
+	putBit : function(bit) {
+	
+		var bufIndex = Math.floor(this.length / 8);
+		if (this.buffer.length <= bufIndex) {
+			this.buffer.push(0);
+		}
+	
+		if (bit) {
+			this.buffer[bufIndex] |= (0x80 >>> (this.length % 8) );
+		}
+	
+		this.length++;
+	}
+};
+
+module.exports = QRBitBuffer;
+
+};
+M["QR8bitByte"]=function(module,exports,require){var QRMode = require('./QRMode');
+
+function QR8bitByte(data) {
+	this.mode = QRMode.MODE_8BIT_BYTE;
+	this.data = data;
+}
+
+QR8bitByte.prototype = {
+
+	getLength : function() {
+		return this.data.length;
+	},
+	
+	write : function(buffer) {
+		for (var i = 0; i < this.data.length; i++) {
+
+			buffer.put(this.data.charCodeAt(i), 8);
+		}
+	}
+};
+
+module.exports = QR8bitByte;
+
+};
+M["QRUtil"]=function(module,exports,require){var QRMode = require('./QRMode');
+var QRPolynomial = require('./QRPolynomial');
+var QRMath = require('./QRMath');
+var QRMaskPattern = require('./QRMaskPattern');
+
+var QRUtil = {
+
+    PATTERN_POSITION_TABLE : [
+        [],
+        [6, 18],
+        [6, 22],
+        [6, 26],
+        [6, 30],
+        [6, 34],
+        [6, 22, 38],
+        [6, 24, 42],
+        [6, 26, 46],
+        [6, 28, 50],
+        [6, 30, 54],        
+        [6, 32, 58],
+        [6, 34, 62],
+        [6, 26, 46, 66],
+        [6, 26, 48, 70],
+        [6, 26, 50, 74],
+        [6, 30, 54, 78],
+        [6, 30, 56, 82],
+        [6, 30, 58, 86],
+        [6, 34, 62, 90],
+        [6, 28, 50, 72, 94],
+        [6, 26, 50, 74, 98],
+        [6, 30, 54, 78, 102],
+        [6, 28, 54, 80, 106],
+        [6, 32, 58, 84, 110],
+        [6, 30, 58, 86, 114],
+        [6, 34, 62, 90, 118],
+        [6, 26, 50, 74, 98, 122],
+        [6, 30, 54, 78, 102, 126],
+        [6, 26, 52, 78, 104, 130],
+        [6, 30, 56, 82, 108, 134],
+        [6, 34, 60, 86, 112, 138],
+        [6, 30, 58, 86, 114, 142],
+        [6, 34, 62, 90, 118, 146],
+        [6, 30, 54, 78, 102, 126, 150],
+        [6, 24, 50, 76, 102, 128, 154],
+        [6, 28, 54, 80, 106, 132, 158],
+        [6, 32, 58, 84, 110, 136, 162],
+        [6, 26, 54, 82, 110, 138, 166],
+        [6, 30, 58, 86, 114, 142, 170]
+    ],
+
+    G15 : (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0),
+    G18 : (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0),
+    G15_MASK : (1 << 14) | (1 << 12) | (1 << 10)    | (1 << 4) | (1 << 1),
+
+    getBCHTypeInfo : function(data) {
+        var d = data << 10;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) >= 0) {
+            d ^= (QRUtil.G15 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) ) );    
+        }
+        return ( (data << 10) | d) ^ QRUtil.G15_MASK;
+    },
+
+    getBCHTypeNumber : function(data) {
+        var d = data << 12;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) >= 0) {
+            d ^= (QRUtil.G18 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) ) );    
+        }
+        return (data << 12) | d;
+    },
+
+    getBCHDigit : function(data) {
+
+        var digit = 0;
+
+        while (data !== 0) {
+            digit++;
+            data >>>= 1;
+        }
+
+        return digit;
+    },
+
+    getPatternPosition : function(typeNumber) {
+        return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1];
+    },
+
+    getMask : function(maskPattern, i, j) {
+        
+        switch (maskPattern) {
+            
+        case QRMaskPattern.PATTERN000 : return (i + j) % 2 === 0;
+        case QRMaskPattern.PATTERN001 : return i % 2 === 0;
+        case QRMaskPattern.PATTERN010 : return j % 3 === 0;
+        case QRMaskPattern.PATTERN011 : return (i + j) % 3 === 0;
+        case QRMaskPattern.PATTERN100 : return (Math.floor(i / 2) + Math.floor(j / 3) ) % 2 === 0;
+        case QRMaskPattern.PATTERN101 : return (i * j) % 2 + (i * j) % 3 === 0;
+        case QRMaskPattern.PATTERN110 : return ( (i * j) % 2 + (i * j) % 3) % 2 === 0;
+        case QRMaskPattern.PATTERN111 : return ( (i * j) % 3 + (i + j) % 2) % 2 === 0;
+
+        default :
+            throw new Error("bad maskPattern:" + maskPattern);
+        }
+    },
+
+    getErrorCorrectPolynomial : function(errorCorrectLength) {
+
+        var a = new QRPolynomial([1], 0);
+
+        for (var i = 0; i < errorCorrectLength; i++) {
+            a = a.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0) );
+        }
+
+        return a;
+    },
+
+    getLengthInBits : function(mode, type) {
+
+        if (1 <= type && type < 10) {
+
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 10;
+            case QRMode.MODE_ALPHA_NUM  : return 9;
+            case QRMode.MODE_8BIT_BYTE  : return 8;
+            case QRMode.MODE_KANJI      : return 8;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 27) {
+
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 12;
+            case QRMode.MODE_ALPHA_NUM  : return 11;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 10;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 41) {
+
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 14;
+            case QRMode.MODE_ALPHA_NUM  : return 13;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 12;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else {
+            throw new Error("type:" + type);
+        }
+    },
+
+    getLostPoint : function(qrCode) {
+        
+        var moduleCount = qrCode.getModuleCount();
+        var lostPoint = 0;
+        var row = 0; 
+        var col = 0;
+
+        
+        for (row = 0; row < moduleCount; row++) {
+
+            for (col = 0; col < moduleCount; col++) {
+
+                var sameCount = 0;
+                var dark = qrCode.isDark(row, col);
+
+                for (var r = -1; r <= 1; r++) {
+
+                    if (row + r < 0 || moduleCount <= row + r) {
+                        continue;
+                    }
+
+                    for (var c = -1; c <= 1; c++) {
+
+                        if (col + c < 0 || moduleCount <= col + c) {
+                            continue;
+                        }
+
+                        if (r === 0 && c === 0) {
+                            continue;
+                        }
+
+                        if (dark === qrCode.isDark(row + r, col + c) ) {
+                            sameCount++;
+                        }
+                    }
+                }
+
+                if (sameCount > 5) {
+                    lostPoint += (3 + sameCount - 5);
+                }
+            }
+        }
+
+
+        for (row = 0; row < moduleCount - 1; row++) {
+            for (col = 0; col < moduleCount - 1; col++) {
+                var count = 0;
+                if (qrCode.isDark(row,     col    ) ) count++;
+                if (qrCode.isDark(row + 1, col    ) ) count++;
+                if (qrCode.isDark(row,     col + 1) ) count++;
+                if (qrCode.isDark(row + 1, col + 1) ) count++;
+                if (count === 0 || count === 4) {
+                    lostPoint += 3;
+                }
+            }
+        }
+
+
+        for (row = 0; row < moduleCount; row++) {
+            for (col = 0; col < moduleCount - 6; col++) {
+                if (qrCode.isDark(row, col) && 
+                        !qrCode.isDark(row, col + 1) && 
+                         qrCode.isDark(row, col + 2) && 
+                         qrCode.isDark(row, col + 3) && 
+                         qrCode.isDark(row, col + 4) && 
+                        !qrCode.isDark(row, col + 5) && 
+                         qrCode.isDark(row, col + 6) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount - 6; row++) {
+                if (qrCode.isDark(row, col) &&
+                        !qrCode.isDark(row + 1, col) &&
+                         qrCode.isDark(row + 2, col) &&
+                         qrCode.isDark(row + 3, col) &&
+                         qrCode.isDark(row + 4, col) &&
+                        !qrCode.isDark(row + 5, col) &&
+                         qrCode.isDark(row + 6, col) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        
+        var darkCount = 0;
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount; row++) {
+                if (qrCode.isDark(row, col) ) {
+                    darkCount++;
+                }
+            }
+        }
+        
+        var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+        lostPoint += ratio * 10;
+
+        return lostPoint;       
+    }
+
+};
+
+module.exports = QRUtil;
+
+};
+M["index"]=function(module,exports,require){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var QR8bitByte = require('./QR8bitByte');
+var QRUtil = require('./QRUtil');
+var QRPolynomial = require('./QRPolynomial');
+var QRRSBlock = require('./QRRSBlock');
+var QRBitBuffer = require('./QRBitBuffer');
+
+function QRCode(typeNumber, errorCorrectLevel) {
+	this.typeNumber = typeNumber;
+	this.errorCorrectLevel = errorCorrectLevel;
+	this.modules = null;
+	this.moduleCount = 0;
+	this.dataCache = null;
+	this.dataList = [];
+}
+
+QRCode.prototype = {
+	
+	addData : function(data) {
+		var newData = new QR8bitByte(data);
+		this.dataList.push(newData);
+		this.dataCache = null;
+	},
+	
+	isDark : function(row, col) {
+		if (row < 0 || this.moduleCount <= row || col < 0 || this.moduleCount <= col) {
+			throw new Error(row + "," + col);
+		}
+		return this.modules[row][col];
+	},
+
+	getModuleCount : function() {
+		return this.moduleCount;
+	},
+	
+	make : function() {
+
+		if (this.typeNumber < 1 ){
+			var typeNumber = 1;
+			for (typeNumber = 1; typeNumber < 40; typeNumber++) {
+				var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, this.errorCorrectLevel);
+
+				var buffer = new QRBitBuffer();
+				var totalDataCount = 0;
+				for (var i = 0; i < rsBlocks.length; i++) {
+					totalDataCount += rsBlocks[i].dataCount;
+				}
+
+				for (var x = 0; x < this.dataList.length; x++) {
+					var data = this.dataList[x];
+					buffer.put(data.mode, 4);
+					buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+					data.write(buffer);
+				}
+				if (buffer.getLengthInBits() <= totalDataCount * 8)
+					break;
+			}
+			this.typeNumber = typeNumber;
+		}
+		this.makeImpl(false, this.getBestMaskPattern() );
+	},
+	
+	makeImpl : function(test, maskPattern) {
+		
+		this.moduleCount = this.typeNumber * 4 + 17;
+		this.modules = new Array(this.moduleCount);
+		
+		for (var row = 0; row < this.moduleCount; row++) {
+			
+			this.modules[row] = new Array(this.moduleCount);
+			
+			for (var col = 0; col < this.moduleCount; col++) {
+				this.modules[row][col] = null;//(col + row) % 3;
+			}
+		}
+	
+		this.setupPositionProbePattern(0, 0);
+		this.setupPositionProbePattern(this.moduleCount - 7, 0);
+		this.setupPositionProbePattern(0, this.moduleCount - 7);
+		this.setupPositionAdjustPattern();
+		this.setupTimingPattern();
+		this.setupTypeInfo(test, maskPattern);
+		
+		if (this.typeNumber >= 7) {
+			this.setupTypeNumber(test);
+		}
+	
+		if (this.dataCache === null) {
+			this.dataCache = QRCode.createData(this.typeNumber, this.errorCorrectLevel, this.dataList);
+		}
+	
+		this.mapData(this.dataCache, maskPattern);
+	},
+
+	setupPositionProbePattern : function(row, col)  {
+		
+		for (var r = -1; r <= 7; r++) {
+			
+			if (row + r <= -1 || this.moduleCount <= row + r) continue;
+			
+			for (var c = -1; c <= 7; c++) {
+				
+				if (col + c <= -1 || this.moduleCount <= col + c) continue;
+				
+				if ( (0 <= r && r <= 6 && (c === 0 || c === 6) ) || 
+                     (0 <= c && c <= 6 && (r === 0 || r === 6) ) || 
+                     (2 <= r && r <= 4 && 2 <= c && c <= 4) ) {
+					this.modules[row + r][col + c] = true;
+				} else {
+					this.modules[row + r][col + c] = false;
+				}
+			}		
+		}		
+	},
+	
+	getBestMaskPattern : function() {
+	
+		var minLostPoint = 0;
+		var pattern = 0;
+	
+		for (var i = 0; i < 8; i++) {
+			
+			this.makeImpl(true, i);
+	
+			var lostPoint = QRUtil.getLostPoint(this);
+	
+			if (i === 0 || minLostPoint >  lostPoint) {
+				minLostPoint = lostPoint;
+				pattern = i;
+			}
+		}
+	
+		return pattern;
+	},
+	
+	createMovieClip : function(target_mc, instance_name, depth) {
+	
+		var qr_mc = target_mc.createEmptyMovieClip(instance_name, depth);
+		var cs = 1;
+	
+		this.make();
+
+		for (var row = 0; row < this.modules.length; row++) {
+			
+			var y = row * cs;
+			
+			for (var col = 0; col < this.modules[row].length; col++) {
+	
+				var x = col * cs;
+				var dark = this.modules[row][col];
+			
+				if (dark) {
+					qr_mc.beginFill(0, 100);
+					qr_mc.moveTo(x, y);
+					qr_mc.lineTo(x + cs, y);
+					qr_mc.lineTo(x + cs, y + cs);
+					qr_mc.lineTo(x, y + cs);
+					qr_mc.endFill();
+				}
+			}
+		}
+		
+		return qr_mc;
+	},
+
+	setupTimingPattern : function() {
+		
+		for (var r = 8; r < this.moduleCount - 8; r++) {
+			if (this.modules[r][6] !== null) {
+				continue;
+			}
+			this.modules[r][6] = (r % 2 === 0);
+		}
+	
+		for (var c = 8; c < this.moduleCount - 8; c++) {
+			if (this.modules[6][c] !== null) {
+				continue;
+			}
+			this.modules[6][c] = (c % 2 === 0);
+		}
+	},
+	
+	setupPositionAdjustPattern : function() {
+	
+		var pos = QRUtil.getPatternPosition(this.typeNumber);
+		
+		for (var i = 0; i < pos.length; i++) {
+		
+			for (var j = 0; j < pos.length; j++) {
+			
+				var row = pos[i];
+				var col = pos[j];
+				
+				if (this.modules[row][col] !== null) {
+					continue;
+				}
+				
+				for (var r = -2; r <= 2; r++) {
+				
+					for (var c = -2; c <= 2; c++) {
+					
+						if (Math.abs(r) === 2 || 
+                            Math.abs(c) === 2 ||
+                            (r === 0 && c === 0) ) {
+							this.modules[row + r][col + c] = true;
+						} else {
+							this.modules[row + r][col + c] = false;
+						}
+					}
+				}
+			}
+		}
+	},
+	
+	setupTypeNumber : function(test) {
+	
+		var bits = QRUtil.getBCHTypeNumber(this.typeNumber);
+        var mod;
+	
+		for (var i = 0; i < 18; i++) {
+			mod = (!test && ( (bits >> i) & 1) === 1);
+			this.modules[Math.floor(i / 3)][i % 3 + this.moduleCount - 8 - 3] = mod;
+		}
+	
+		for (var x = 0; x < 18; x++) {
+			mod = (!test && ( (bits >> x) & 1) === 1);
+			this.modules[x % 3 + this.moduleCount - 8 - 3][Math.floor(x / 3)] = mod;
+		}
+	},
+	
+	setupTypeInfo : function(test, maskPattern) {
+	
+		var data = (this.errorCorrectLevel << 3) | maskPattern;
+		var bits = QRUtil.getBCHTypeInfo(data);
+        var mod;
+
+		for (var v = 0; v < 15; v++) {
+	
+			mod = (!test && ( (bits >> v) & 1) === 1);
+	
+			if (v < 6) {
+				this.modules[v][8] = mod;
+			} else if (v < 8) {
+				this.modules[v + 1][8] = mod;
+			} else {
+				this.modules[this.moduleCount - 15 + v][8] = mod;
+			}
+		}
+
+		for (var h = 0; h < 15; h++) {
+	
+			mod = (!test && ( (bits >> h) & 1) === 1);
+			
+			if (h < 8) {
+				this.modules[8][this.moduleCount - h - 1] = mod;
+			} else if (h < 9) {
+				this.modules[8][15 - h - 1 + 1] = mod;
+			} else {
+				this.modules[8][15 - h - 1] = mod;
+			}
+		}
+
+		this.modules[this.moduleCount - 8][8] = (!test);
+	
+	},
+	
+	mapData : function(data, maskPattern) {
+		
+		var inc = -1;
+		var row = this.moduleCount - 1;
+		var bitIndex = 7;
+		var byteIndex = 0;
+		
+		for (var col = this.moduleCount - 1; col > 0; col -= 2) {
+	
+			if (col === 6) col--;
+	
+			while (true) {
+	
+				for (var c = 0; c < 2; c++) {
+					
+					if (this.modules[row][col - c] === null) {
+						
+						var dark = false;
+	
+						if (byteIndex < data.length) {
+							dark = ( ( (data[byteIndex] >>> bitIndex) & 1) === 1);
+						}
+	
+						var mask = QRUtil.getMask(maskPattern, row, col - c);
+	
+						if (mask) {
+							dark = !dark;
+						}
+						
+						this.modules[row][col - c] = dark;
+						bitIndex--;
+	
+						if (bitIndex === -1) {
+							byteIndex++;
+							bitIndex = 7;
+						}
+					}
+				}
+								
+				row += inc;
+	
+				if (row < 0 || this.moduleCount <= row) {
+					row -= inc;
+					inc = -inc;
+					break;
+				}
+			}
+		}
+		
+	}
+
+};
+
+QRCode.PAD0 = 0xEC;
+QRCode.PAD1 = 0x11;
+
+QRCode.createData = function(typeNumber, errorCorrectLevel, dataList) {
+	
+	var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectLevel);
+	
+	var buffer = new QRBitBuffer();
+	
+	for (var i = 0; i < dataList.length; i++) {
+		var data = dataList[i];
+		buffer.put(data.mode, 4);
+		buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+		data.write(buffer);
+	}
+
+	var totalDataCount = 0;
+	for (var x = 0; x < rsBlocks.length; x++) {
+		totalDataCount += rsBlocks[x].dataCount;
+	}
+
+	if (buffer.getLengthInBits() > totalDataCount * 8) {
+		throw new Error("code length overflow. (" + 
+            buffer.getLengthInBits() + 
+            ">" +  
+            totalDataCount * 8 + 
+            ")");
+	}
+
+	if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
+		buffer.put(0, 4);
+	}
+
+	while (buffer.getLengthInBits() % 8 !== 0) {
+		buffer.putBit(false);
+	}
+
+	while (true) {
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD0, 8);
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD1, 8);
+	}
+
+	return QRCode.createBytes(buffer, rsBlocks);
+};
+
+QRCode.createBytes = function(buffer, rsBlocks) {
+
+	var offset = 0;
+	
+	var maxDcCount = 0;
+	var maxEcCount = 0;
+	
+	var dcdata = new Array(rsBlocks.length);
+	var ecdata = new Array(rsBlocks.length);
+	
+	for (var r = 0; r < rsBlocks.length; r++) {
+
+		var dcCount = rsBlocks[r].dataCount;
+		var ecCount = rsBlocks[r].totalCount - dcCount;
+
+		maxDcCount = Math.max(maxDcCount, dcCount);
+		maxEcCount = Math.max(maxEcCount, ecCount);
+		
+		dcdata[r] = new Array(dcCount);
+		
+		for (var i = 0; i < dcdata[r].length; i++) {
+			dcdata[r][i] = 0xff & buffer.buffer[i + offset];
+		}
+		offset += dcCount;
+		
+		var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+		var rawPoly = new QRPolynomial(dcdata[r], rsPoly.getLength() - 1);
+
+		var modPoly = rawPoly.mod(rsPoly);
+		ecdata[r] = new Array(rsPoly.getLength() - 1);
+		for (var x = 0; x < ecdata[r].length; x++) {
+            var modIndex = x + modPoly.getLength() - ecdata[r].length;
+			ecdata[r][x] = (modIndex >= 0)? modPoly.get(modIndex) : 0;
+		}
+
+	}
+	
+	var totalCodeCount = 0;
+	for (var y = 0; y < rsBlocks.length; y++) {
+		totalCodeCount += rsBlocks[y].totalCount;
+	}
+
+	var data = new Array(totalCodeCount);
+	var index = 0;
+
+	for (var z = 0; z < maxDcCount; z++) {
+		for (var s = 0; s < rsBlocks.length; s++) {
+			if (z < dcdata[s].length) {
+				data[index++] = dcdata[s][z];
+			}
+		}
+	}
+
+	for (var xx = 0; xx < maxEcCount; xx++) {
+		for (var t = 0; t < rsBlocks.length; t++) {
+			if (xx < ecdata[t].length) {
+				data[index++] = ecdata[t][xx];
+			}
+		}
+	}
+
+	return data;
+
+};
+
+module.exports = QRCode;
+
+};
+var Q=R("index"),L=R("QRErrorCorrectLevel");
+return{svg:function(text){var q=new Q(-1,L.M);q.addData(text);q.make();var n=q.getModuleCount(),p="",r,c;for(r=0;r<n;r++){for(c=0;c<n;c++){if(q.isDark(r,c))p+="M"+c+" "+r+"h1v1h-1z"}}return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 '+(n+4)+" "+(n+4)+'" shape-rendering="crispEdges" role="img" aria-label="Código QR para Google Authenticator"><rect x="-2" y="-2" width="'+(n+4)+'" height="'+(n+4)+'" fill="#fff"/><path d="'+p+'" fill="#000"/></svg>'}}})();
+</script>
 <script>
 (function(){
   var $=function(i){return document.getElementById(i)};
@@ -1409,7 +2725,7 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
   var AUTH={login:1,registro:1};
   function applyAuth(which){
     var lg=which==='login';
-    $('f-login').hidden=!lg;$('f-reg').hidden=lg;
+    $('f-login').hidden=!lg;$('f-reg').hidden=lg;$('f-forgot').hidden=true;$('acard').classList.remove('fg');
     $('tab-login').setAttribute('aria-selected',lg?'true':'false');$('tab-registro').setAttribute('aria-selected',lg?'false':'true');
     $('a-title').textContent=lg?'Bienvenido/a de vuelta':'Creá tu cuenta';
     $('a-sub').textContent=lg?'Accedé para ver el estado de tus gestiones.':'Subí tu factura en menos de 60 segundos. Si no ahorrás, no pagás.';
@@ -1458,7 +2774,7 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
     e.preventDefault();
     if(!okMail($('l-mail').value.trim())){$('l-err').textContent='Escribí un email válido.';$('l-mail').focus();return}
     if(!$('l-pass').value){$('l-err').textContent='Escribí tu contraseña.';$('l-pass').focus();return}
-    $('l-err').textContent='';location.hash='portal';
+    $('l-err').textContent='';remSet($('l-rem').checked,$('l-mail').value.trim());location.hash='portal';
   });
   $('f-reg').addEventListener('submit',function(e){
     e.preventDefault();
@@ -1475,9 +2791,37 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
   $('tab-login').addEventListener('click',function(){location.hash='login'});
   $('tab-registro').addEventListener('click',function(){location.hash='registro'});
 
+  /* recordarme: guarda solo el email y el nombre (nunca la contraseña), por 30 días.
+     En producción conviene una cookie de sesión larga (HttpOnly) emitida por el servidor. */
+  var REM='mg-remember';
+  function remGet(){try{var o=JSON.parse(localStorage.getItem(REM)||'null');if(o&&o.e&&o.t&&Date.now()-o.t<2592e6)return o}catch(e){}return null}
+  function remSet(on,mail){try{if(on)localStorage.setItem(REM,JSON.stringify({e:mail,n:userName||'',t:Date.now()}));else localStorage.removeItem(REM)}catch(e){}}
+  /* olvidé mi contraseña */
+  function showForgot(on){
+    $('f-forgot').hidden=!on;$('f-login').hidden=on;$('acard').classList.toggle('fg',on);
+    $('a-title').textContent=on?'Recuperá tu contraseña':'Bienvenido/a de vuelta';
+    $('a-sub').textContent=on?'Te enviamos un enlace por email para crear una nueva.':'Accedé para ver el estado de tus gestiones.';
+    $('fg-err').textContent='';$('fg-ok').hidden=true;$('fg-btn').disabled=false;$('fg-btn').textContent='Enviar enlace';
+    if(on){$('fg-mail').value=$('l-mail').value.trim();$('fg-mail').focus()}else $('l-mail').focus();
+  }
+  $('l-forgot').addEventListener('click',function(){showForgot(true)});
+  $('fg-back').addEventListener('click',function(){showForgot(false)});
+  $('f-forgot').addEventListener('submit',async function(e){
+    e.preventDefault();var m=$('fg-mail').value.trim(),b=$('fg-btn');
+    if(!okMail(m)){$('fg-err').textContent='Escribí un email válido.';$('fg-mail').focus();return}
+    $('fg-err').textContent='';b.disabled=true;
+    var c=window.AbortController?new AbortController():null;if(c)setTimeout(function(){try{c.abort()}catch(x){}},4000);
+    /* Servidor: POST /api/auth/forgot-password {email} debe enviar el enlace. Se muestra siempre el mismo mensaje para no revelar qué emails tienen cuenta. */
+    try{await fetch('/api/auth/forgot-password',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:m}),signal:c?c.signal:undefined})}catch(x){}
+    $('fg-ok').textContent='Si existe una cuenta con '+m+', te enviamos un enlace para crear una contraseña nueva. Revisá también la carpeta de spam.';
+    $('fg-ok').hidden=false;b.textContent='Reenviar enlace';b.disabled=false;
+  });
+
   /* ---------- routing ---------- */
   function route(){
     var h=location.hash.replace('#','');
+    if(h==='login'){var rm=remGet();if(rm){if(rm.n&&!userName)userName=rm.n;location.replace('#portal');return}}
+    var nc=$('nav-cta');if(nc){var rm2=remGet();nc.textContent=rm2?'Mi portal':'Empezar gratis';nc.setAttribute('href',rm2?'#portal':'#registro')}
     var view=AUTH[h]?'auth':(h==='portal'?'portal':(h==='comparador'?'comparador':'home'));
     document.body.setAttribute('data-view',view);
     $('landing').hidden=view!=='home';$('v-auth').hidden=view!=='auth';$('v-portal').hidden=view!=='portal';$('v-comparador').hidden=view!=='comparador';
@@ -1558,15 +2902,42 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
   var SV=[['Internet','Personal Flow, Movistar, Claro, Telecentro','wifi'],['TV / cable','Personal Flow, Movistar, Claro, DirecTV','tv'],['Celular','Personal, Movistar, Claro, Tuenti','phone'],['Streaming','Netflix, Disney+, Prime Video, HBO Max','play']];
   $('svcs').innerHTML=SV.map(function(s){return '<button type="button" class="glass svc" data-act="goup"><span class="ico">'+ic(s[2],20)+'</span><span><b>'+s[0]+'</b><small>'+s[1]+'</small></span></button>'}).join('');
   /* gestiones */
-  function chart(t){
-    var a=+t.amount||0,tot=+t.estimated_saving||0,mo=Math.round(tot/MONTHS),nw=Math.max(0,a-mo),pc=a?Math.round(mo/a*100):0,w=a?Math.max(8,Math.round(nw/a*100)):0,cols='';
-    for(var i=1;i<=MONTHS;i++)cols+='<div class="cc-m"><div class="cc-p"><i class="o" style="animation-delay:'+(i*.07)+'s;height:100%"></i><i class="n" style="animation-delay:'+(i*.07+.05)+'s;height:'+w+'%"></i></div><small>M'+i+'</small></div>';
-    return '<div class="cc"><div class="gest-h"><b>Factura original vs. con descuento</b><span class="pill go">-'+pc+'% por mes</span></div>'+
-      '<div class="cc-r"><span>Original</span><div class="cc-t"><i class="o" style="--w:100%"></i></div><b>'+M(a)+'</b></div>'+
-      '<div class="cc-r"><span>Con Manguito</span><div class="cc-t"><i class="n" style="--w:'+w+'%"></i></div><b class="grad">'+M(nw)+'</b></div>'+
-      '<div class="cc-p6" aria-hidden="true">'+cols+'</div>'+
-      '<div class="cc-f"><div><small>Ahorro por mes</small><b>'+M(mo)+'</b></div><div><small>Ahorro en '+MONTHS+' meses</small><b>'+M(tot)+'</b></div></div></div>';
+  /* inicio: cómo crece tu ahorro (estimación a MONTHS meses, según tus gestiones) */
+  var MS=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'],ahDone=false;
+  function kM(v){v=Math.round(v);return v>=1e6?'$'+(v/1e6).toFixed(1).replace('.',',')+' M':(v>=1e3?'$'+Math.round(v/1e3)+' mil':'$'+v)}
+  function niceMax(v){var p=Math.pow(10,Math.floor(Math.log(v)/Math.LN10)),c=[1,2,2.5,4,5,10],k;for(k=0;k<c.length;k++)if(c[k]*p>=v)return c[k]*p;return 10*p}
+  function savings(){
+    var svg=$('ah-svg'),A=0,P=0,n=MONTHS,W=Math.max(260,Math.round(svg.getBoundingClientRect().width)||320),H=Math.round(Math.max(150,Math.min(200,W*.34))),L=50,R=12,T=12,B=24,pw=W-L-R,ph=H-T-B,i;svg.setAttribute('viewBox','0 0 '+W+' '+H);
+    src().forEach(function(t){var m=meta(t.current_step);if(m.i<0)return;var mo=(+t.estimated_saving||0)/MONTHS;if(m.i===3||t.payment_status==='pagado')A+=mo;else P+=mo});
+    A=Math.round(A);P=Math.round(P);
+    var none=!(A+P);$('ah-body').hidden=none;$('ah-empty').hidden=!none;$('ah-sub').hidden=none;$('ah-pill').hidden=none;
+    if(none)return;
+    var top=(A+P)*n,Y=niceMax(top),now=new Date(),cur=now.getMonth();
+    function X(k){return L+pw*k/n}function V(v){return T+ph*(1-v/Y)}
+    var g='',lab='',pa='',pp='',k;
+    for(i=0;i<=4;i++){var yv=Y*i/4,yy=V(yv);g+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+yy+'" y2="'+yy+'" stroke="rgba(255,226,180,'+(i?'.1':'.22')+')"/><text x="'+(L-6)+'" y="'+(yy+3)+'" text-anchor="end">'+(i?kM(yv):'$0')+'</text>'}
+    for(k=0;k<=n;k++){lab+='<text x="'+X(k)+'" y="'+(H-8)+'" text-anchor="middle">'+(k?MS[(cur+k)%12]:'Hoy')+'</text>';pa+=(k?'L':'M')+X(k)+' '+V(A*k)+' ';pp+=(k?'L':'M')+X(k)+' '+V((A+P)*k)+' '}
+    var area=pa+'L'+X(n)+' '+V(0)+' L'+X(0)+' '+V(0)+' Z';
+    var pl=P?'<path d="'+pp+'" fill="none" stroke="#4ADE96" stroke-width="2" stroke-linecap="round" opacity=".9" style="stroke-dasharray:5 4"/>':'';
+    svg.setAttribute('class','ah-svg'+(ahDone?' still':''));
+    svg.innerHTML='<defs><linearGradient id="ahF" gradientUnits="userSpaceOnUse" x1="0" y1="'+T+'" x2="0" y2="'+(T+ph)+'"><stop offset="0" stop-color="#FF9A1F" stop-opacity=".5"/><stop offset="1" stop-color="#FF9A1F" stop-opacity="0"/></linearGradient><linearGradient id="ahS" gradientUnits="userSpaceOnUse" x1="'+L+'" y1="0" x2="'+(W-R)+'" y2="0"><stop offset="0" stop-color="#FFD34A"/><stop offset=".55" stop-color="#FF9A1F"/><stop offset="1" stop-color="#FF5A2B"/></linearGradient></defs>'+g+lab+
+      '<path class="ah-area" d="'+area+'" fill="url(#ahF)"/>'+pl+
+      '<path d="'+pa+'" pathLength="100" class="line-a" fill="none" stroke="url(#ahS)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>'+
+      '<g id="ah-mk"><line id="ah-mkl" y1="'+T+'" y2="'+(T+ph)+'" stroke="rgba(255,255,255,.35)" stroke-dasharray="3 3"/>'+(P?'<circle id="ah-mkp" r="4" fill="#4ADE96" stroke="#0b0805" stroke-width="1.5"/>':'')+'<circle id="ah-mka" r="4.5" fill="#FFB13B" stroke="#0b0805" stroke-width="1.5"/></g>';
+    function show(k){
+      var x=X(k),a=$('ah-mka'),p=$('ah-mkp');$('ah-mkl').setAttribute('x1',x);$('ah-mkl').setAttribute('x2',x);a.setAttribute('cx',x);a.setAttribute('cy',V(A*k));if(p){p.setAttribute('cx',x);p.setAttribute('cy',V((A+P)*k))}
+      var when=k?'En '+k+(k===1?' mes':' meses')+' ('+MES[(cur+k)%12]+')':'Hoy';
+      $('ah-note').innerHTML=when+': <b>'+M(A*k)+'</b> ahorrados con tus descuentos activos'+(P?' · <b style="color:var(--leaf)">'+M((A+P)*k)+'</b> sumando las gestiones en curso':'');
+    }
+    function at(e){var r=svg.getBoundingClientRect();return Math.max(0,Math.min(n,Math.round(((e.clientX-r.left)/r.width*W-L)/(pw/n))))}
+    svg.onpointermove=function(e){show(at(e))};svg.onpointerdown=function(e){show(at(e))};svg.onpointerleave=function(){show(n)};
+    show(n);
+    $('ah-l2').hidden=!P;$('ah-pt').hidden=!P;
+    $('ah-m').textContent=M(A);$('ah-t').textContent=M(A*n);$('ah-p').textContent=M((A+P)*n);
+    svg.setAttribute('aria-label','Ahorro acumulado estimado: '+M(A*n)+' en '+n+' meses con tus descuentos activos'+(P?' y '+M((A+P)*n)+' sumando las gestiones en curso':''));
+    ahDone=true;
   }
+  var ahT;window.addEventListener('resize',function(){clearTimeout(ahT);ahT=setTimeout(function(){if(!$('v-portal').hidden)savings()},150)});
   function card(t){
     var m=meta(t.current_step),i=m.i,paid=t.payment_status==='pagado',id=esc(t.id),can=i===-1;
     var steps=['Recibida','Negociando','Comisión','Activo'];
@@ -1579,7 +2950,7 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
     else if(i===1)b='<div class="fee"><small>Hablamos con la empresa para aplicar la mejor tarifa.</small>'+cb+'</div>';
     else if(i===3||paid)b='<div class="info" style="color:var(--leaf)">'+ic('check')+'<span>Descuento activo y aplicado con éxito en tu factura mensual.</span></div>';
     return '<div class="gest glass"><div class="gh"><span class="ico">'+ic('card',20)+'</span><div><h3>'+esc(t.provider_name)+'<span class="pill '+m.k+'">'+m.st+'</span></h3><div class="meta"><span>Ticket #'+esc(String(t.id).slice(0,8))+'</span><span>Fecha: '+D(t.created_at)+'</span><span>Monto: '+M(t.amount)+'</span></div></div></div>'+
-      '<div class="sv"><small>Ahorro estimado</small><b class="grad">'+M(t.estimated_saving)+'</b></div>'+pay+tr+((i===3||paid)?chart(t):'')+
+      '<div class="sv"><small>Ahorro estimado</small><b class="grad">'+M(t.estimated_saving)+'</b></div>'+pay+tr+
       '<div class="acts"><button type="button" class="btn btn-ghost" data-act="hist" data-id="'+id+'">'+ic('file')+'Ver historial</button>'+inv+'</div>'+b+'</div>';
   }
   function drawG(){
@@ -1679,8 +3050,7 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
     var t=byId(id);if(!t)return;var m=meta(t.current_step),i=m.i;
     $('mt-title').textContent=t.provider_name+' · Detalle';
     $('mt-body').innerHTML='<div class="gest-h"><span>Estado actual: <span class="pill '+m.k+'">'+m.st+'</span></span>'+(t.created_at?'<small class="mut">Subido el '+D(t.created_at)+'</small>':'')+'</div><p class="mut">'+m.m+'</p>'+
-      (t.amount?'<p><b>Importe original factura:</b> '+M(t.amount)+'</p>':'')+(t.estimated_saving?'<p style="color:var(--leaf)"><b>Ahorro estimado total:</b> '+M(t.estimated_saving)+'</p>':'')+(i===3?chart(t):'')+
-      (i===2&&t.payment_status!=='pagado'?'<button class="btn btn-pay" type="button" data-act="bonif" data-id="'+esc(t.id)+'">'+ic('card')+'Pagar comisión ('+M(cm(t))+')</button>':'')+
+      (t.amount?'<p><b>Importe original factura:</b> '+M(t.amount)+'</p>':'')+(t.estimated_saving?'<p style="color:var(--leaf)"><b>Ahorro estimado total:</b> '+M(t.estimated_saving)+'</p>':'')+      (i===2&&t.payment_status!=='pagado'?'<button class="btn btn-pay" type="button" data-act="bonif" data-id="'+esc(t.id)+'">'+ic('card')+'Pagar comisión ('+M(cm(t))+')</button>':'')+
       (t.invoice_id?'<a class="btn btn-ghost" href="/api/invoices/'+encodeURIComponent(t.invoice_id)+'/file" target="_blank" rel="noopener">'+ic('file')+'Ver factura adjunta</a>':'')+
       (i>=0&&i<=1?'<button class="btn btn-ghost dng" type="button" data-act="cancel" data-id="'+esc(t.id)+'">'+ic('trash')+'Cancelar esta gestión</button>':'')+
       '<h3 style="font-size:1rem">Historial de avances</h3><div class="tm" id="mt-ev"><small class="mut">Cargando eventos...</small></div>';
@@ -1691,13 +3061,25 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
       el.innerHTML=(evs&&evs.length)?evs.map(function(e){return '<div><i></i><div><b>'+esc(e.to_step||e.step||'Actualización')+'</b><small>'+D(e.created_at)+'</small>'+(e.note?'<span class="mut">'+esc(e.note)+'</span>':'')+'</div></div>'}).join(''):'<p class="mut">Gestión iniciada. Próximamente verás los registros de negociación acá.</p>';
     }catch(e){el.innerHTML='<p class="mut">Gestión en curso.</p>'}
   }
+  /* código de barras decorativo del ticket (se genera con el número de ticket) */
+  function ptBars(seed){
+    var h=2166136261,i;for(i=0;i<seed.length;i++){h^=seed.charCodeAt(i);h=Math.imul(h,16777619)>>>0}
+    function r(){h^=h<<13;h>>>=0;h^=h>>>17;h^=h<<5;h>>>=0;return h/4294967296}
+    var x=0,o='',w;while(x<248){w=1+Math.floor(r()*3);o+='<rect x="'+x+'" width="'+w+'" height="60"/>';x+=w+1+Math.floor(r()*2.4)}
+    function d(q){var z='';for(var k=0;k<q;k++)z+=Math.floor(r()*10);return z}
+    $('pt-bars').setAttribute('viewBox','0 0 '+x+' 60');$('pt-bars').innerHTML=o;
+    $('pt-dg').innerHTML='<span>'+d(1)+'</span><span>'+d(7)+'</span><span>'+d(6)+'</span>';
+  }
   function openBonif(id){
-    closeM('m-ticket');activeT=id;var t=byId(id)||demoT[0];
-    var a=+t.amount||63569,tot=+t.estimated_saving||25500,mo=Math.round(tot/MONTHS),c=cm(t);
-    $('bf-a').textContent=M(a);$('bf-b').textContent=M(Math.max(0,a-mo));$('bf-t').textContent=M(tot);
-    $('bf-s').textContent='('+M(mo)+'/mes por '+MONTHS+' meses, aplicado a tu cuenta)';
-    $('bf-p').textContent=Math.round(COMM*100);$('bf-c').textContent=M(c);$('bf-t2').textContent=M(tot);
-    $('bf-n').textContent=M(Math.max(0,tot-c));$('bf-btn').textContent='Pagar '+M(c)+' con Ualá';
+    closeM('m-ticket');activeT=id;var t=byId(id)||demoT[0],n=new Date();
+    var a=+t.amount||63569,tot=+t.estimated_saving||25500,mo=Math.round(tot/MONTHS),c=cm(t),sid=String(t.id||'00000000').slice(0,8);
+    $('pt-id').textContent='#'+sid;$('pt-amt').textContent=M(c);
+    $('pt-dt').textContent=D(n)+' · '+pad(n.getHours())+':'+pad(n.getMinutes())+'';
+    $('pt-co').textContent=t.provider_name||'Tu compañía';
+    $('pt-tot').textContent=M(tot);$('pt-pct').textContent=Math.round(COMM*100);$('pt-com').textContent=M(c);$('pt-net').textContent=M(Math.max(0,tot-c));
+    $('pt-ln').textContent='Tu factura baja de '+M(a)+' a '+M(Math.max(0,a-mo))+' por mes durante '+MONTHS+' meses.';
+    $('bf-btn').textContent='Pagar '+M(c)+' con Ualá';
+    ptBars(sid+String(c));
     openM('m-bonif');
   }
   async function startPay(id){
@@ -1723,9 +3105,9 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
     }catch(x){toast('Error de conexión.')}
     b.disabled=false;
   });
-  async function logout(){try{await fetch('/api/auth/logout',{method:'POST',credentials:'include'})}catch(e){}userName='';loaded=false;location.hash='top'}
+  async function logout(){remSet(false);try{await fetch('/api/auth/logout',{method:'POST',credentials:'include'})}catch(e){}userName='';loaded=false;location.hash='top'}
   /* carga de datos (con datos de ejemplo si no hay servidor) */
-  function renderAll(){hero();ult();stats();drawG();drawC();drawL();drawF();drawPlan();tfStatus();paint()}
+  function renderAll(){hero();ult();savings();stats();drawG();drawC();drawL();drawF();drawPlan();tfStatus();paint()}
   async function loadAll(){
     function g(u,d){return fetch(u,{credentials:'include'}).then(function(r){return r.ok?r.json():d}).catch(function(){return d})}
     var r=await Promise.all([g('/api/tickets',[]),g('/api/invoices',[]),g('/api/my/promotions',{items:[],events:[]}),g('/api/payment-settings',{})]);
@@ -1734,7 +3116,7 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
     EV=EV.map(function(e){return{date:e.date||e[0],title:e.title||e[1]||'Evento',kind:e.kind||e[2]}});
     renderAll();
   }
-  function setUser(){$('p-name').textContent=userName||'Tu cuenta';$('pf-name').textContent=userName||'Tu cuenta';if(!photoUrl){$('p-av').textContent=(userName||'M').charAt(0).toUpperCase();$('pav').textContent=(userName||'M').charAt(0).toUpperCase()}$('p-hello').textContent='Hola'+(userName?', '+userName.split(' ')[0]:'')}
+  function setUser(){var rm3=remGet();if(rm3&&userName&&rm3.n!==userName)remSet(true,rm3.e);$('p-name').textContent=userName||'Tu cuenta';$('pf-name').textContent=userName||'Tu cuenta';if(!photoUrl){$('p-av').textContent=(userName||'M').charAt(0).toUpperCase();$('pav').textContent=(userName||'M').charAt(0).toUpperCase()}$('p-hello').textContent='Hola'+(userName?', '+userName.split(' ')[0]:'')}
   async function auth(){
     try{var r=await fetch('/api/auth/me',{credentials:'include'});
       if(r.ok){var d=await r.json();
@@ -1751,7 +3133,6 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
     setPhoto(URL.createObjectURL(f));toast('Foto de perfil actualizada.')});
   function lastConn(){var now=new Date(),prev=null;try{prev=localStorage.getItem('mg-last');localStorage.setItem('mg-last',now.toISOString())}catch(e){}
     var d=prev?new Date(prev):now;$('lastc').textContent=d.toLocaleDateString('es-AR',{day:'2-digit',month:'2-digit',year:'numeric'})+' · '+d.toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'})+' hs'}
-  try{if(localStorage.getItem('mg-fid')==='1'){$('fid').setAttribute('aria-checked','true');$('fid-s').textContent='Activado'}}catch(e){}
   /* verificación en dos pasos (demo en el navegador: en producción el secreto y los códigos los maneja el servidor) */
   var TFA={m:'',secret:'',code:'',exp:0},B32='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
   try{TFA.m=localStorage.getItem('mg-2fa')||''}catch(e){}
@@ -1762,7 +3143,16 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
   function tfShow(id){['tf-pick','tf-appp','tf-mailp','tf-on'].forEach(function(x){$(x).hidden=x!==id})}
   function tfStatus(){var on=!!TFA.m,pl=$('tf-p'),txt=on?'Activada · '+(TFA.m==='app'?'Google Authenticator':'código por email'):'Desactivada';$('tf-s').textContent=txt;$('tf-on-t').textContent='Verificación '+txt.toLowerCase().replace('activada · ','activada con ');pl.textContent=on?'Activada':'Configurar';pl.className='pill '+(on?'go':'wait')}
   function tfDone(m){TFA.m=m;try{localStorage.setItem('mg-2fa',m)}catch(e){}tfStatus();closeM('m-2fa');toast('Verificación en dos pasos activada.')}
-  function tfApp(){TFA.secret=b32(16);$('tf-key').textContent=TFA.secret.match(/.{4}/g).join(' ');$('tf-link').href='otpauth://totp/Manguito:'+encodeURIComponent(userName||'cuenta')+'?secret='+TFA.secret+'&issuer=Manguito';$('tf-code').value='';$('tf-err').textContent='';tfShow('tf-appp')}
+  /* Cuenta de Authenticator: la clave y el QR se generan acá solo para la demo.
+     Para conectarlo con el servidor: pedir la clave a tu API (ej. POST /api/auth/2fa/setup), poner esa clave en TFA.secret y verificar el código en el servidor. */
+  function tfApp(){
+    TFA.secret=b32(16);
+    var acct=($('l-mail').value||$('r-mail').value||userName||'cuenta').trim(),
+        uri='otpauth://totp/Manguito:'+encodeURIComponent(acct)+'?secret='+TFA.secret+'&issuer=Manguito&algorithm=SHA1&digits=6&period=30';
+    $('tf-key').textContent=TFA.secret.match(/.{4}/g).join(' ');$('tf-link').href=uri;
+    try{$('tf-qr').innerHTML=MGQR.svg(uri)}catch(e){$('tf-qr').textContent=''}
+    $('tf-code').value='';$('tf-err').textContent='';tfShow('tf-appp');
+  }
   async function tfVApp(){
     var c=$('tf-code').value.replace(/\D/g,''),er=$('tf-err');
     if(c.length!==6){er.textContent='Ingresá los 6 dígitos que muestra la app.';return}
@@ -1805,7 +3195,6 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
       case'photo':$('photo').click();break;
       case'plan':drawPlan();openM('m-plan');break;
       case'planset':PLAN=PLAN==='plus'?'gratis':'plus';drawPlan();closeM('m-plan');toast(PLAN==='plus'?'Demo: en la versión real se abre el pago seguro con Ualá.':'Volviste al plan Gratis.');break;
-      case'fid':var on=$('fid').getAttribute('aria-checked')!=='true';$('fid').setAttribute('aria-checked',on?'true':'false');$('fid-s').textContent=on?'Activado':'Desactivado';try{localStorage.setItem('mg-fid',on?'1':'')}catch(e){}toast(on?'Face ID activado para ingresar desde este dispositivo.':'Face ID desactivado.');break;
     }
   });
   document.addEventListener('keydown',function(e){if(e.key==='Escape')['m-ticket','m-bonif','m-pwd','m-plan','m-2fa'].forEach(closeM)});
