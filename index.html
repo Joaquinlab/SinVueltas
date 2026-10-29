@@ -800,6 +800,176 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
 .ah-f b{font-family:var(--f-display);font-size:1.1rem;color:var(--yellow)}
 .ah-f>div.g{background:var(--leaf-soft);border-color:rgba(74,222,150,.4)}.ah-f>div.g b{color:var(--leaf)}
 @media(prefers-reduced-motion:reduce){.ah-area{animation:none}}
+
+/* ===== ajustes móvil / portal (v2) ===== */
+
+/* --- video: botones de vidrio, controles que se ocultan al reproducir, más grande en celular --- */
+.vid-play{background:rgba(255,255,255,.12);-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);border:1px solid rgba(255,255,255,.45);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 12px 34px -10px rgba(0,0,0,.7)}
+.vid-play:hover,.vid-play:active{background:rgba(255,255,255,.2)}
+.vid-nav{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.38)}
+.vid-nav:hover,.vid-nav:active{background:rgba(255,255,255,.2);color:#fff;border-color:rgba(255,255,255,.5)}
+.vc-b{background:rgba(255,255,255,.14);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.vc-b:hover,.vc-b:active{background:rgba(255,255,255,.26);color:#fff}
+.vc-seek{accent-color:#fff}
+.vid-dots button[aria-current="true"]{background:rgba(255,255,255,.9)}
+.vc-bar{transition:opacity .3s ease}
+.vid.playing .vc-bar{opacity:0;pointer-events:none}
+.vid.playing.ctl .vc-bar,.vid.playing .vc-bar:focus-within{opacity:1;pointer-events:auto}
+@media(hover:hover){.vid.playing .vcard[data-pos="0"]:hover .vc-bar{opacity:1;pointer-events:auto}}
+@media(max-width:600px){
+  .vid-sec .wrap{padding-inline:8px}
+  .vid-stage{aspect-ratio:100/57}
+  .vcard{width:90%}
+  .vcard[data-pos="1"]{transform:translate(-50%,-50%) translateX(58%) translateZ(-150px) rotateY(-40deg) scale(.84)}
+  .vcard[data-pos="-1"]{transform:translate(-50%,-50%) translateX(-58%) translateZ(-150px) rotateY(40deg) scale(.84)}
+  .vid-play{width:4rem;height:4rem;margin:-2rem 0 0 -2rem}
+  .vc-bar{padding:2rem .8rem .7rem;gap:.6rem}
+  .vc-b{width:2.4rem;height:2.4rem}
+}
+
+/* --- portada en celular: tres botones de costado --- */
+@media(max-width:600px){
+  .cta-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;width:100%;margin-block:1.4rem 1.3rem}
+  .cta-row .btn{padding:.7rem .35rem;font-size:.78rem;line-height:1.2;text-align:center;min-height:3.2rem;white-space:normal}
+}
+
+/* --- precios: las tarjetas se dan vuelta al entrar y ondean como una bandera --- */
+.price{perspective:1400px}
+.pc.flip{opacity:0;transform-origin:left center}
+.pc.flip.in{animation:flipIn 1.05s cubic-bezier(.2,.8,.2,1) var(--fd,0s) both,flagSway 6.5s ease-in-out calc(var(--fd,0s) + 1.3s) infinite alternate}
+@keyframes flipIn{from{opacity:0;transform:perspective(1200px) rotateY(-78deg) translateY(1.6rem)}60%{opacity:1}to{opacity:1;transform:perspective(1200px) rotateY(0) translateY(0)}}
+@keyframes flagSway{from{transform:perspective(1200px) rotateY(-2.4deg) skewY(-.25deg)}to{transform:perspective(1200px) rotateY(2.4deg) skewY(.25deg)}}
+
+/* --- registro: las rayas caen como una cascada --- */
+.acard::before,.acard::after{height:64%;
+  -webkit-mask-image:radial-gradient(120% 100% at 0% 0%,#000 20%,transparent 72%),linear-gradient(180deg,transparent 0,#000 45%,transparent 100%);
+  mask-image:radial-gradient(120% 100% at 0% 0%,#000 20%,transparent 72%),linear-gradient(180deg,transparent 0,#000 45%,transparent 100%);
+  -webkit-mask-size:100% 100%,100% 8rem;mask-size:100% 100%,100% 8rem;
+  -webkit-mask-repeat:no-repeat,repeat-y;mask-repeat:no-repeat,repeat-y;
+  -webkit-mask-composite:source-in;mask-composite:intersect;
+  animation:fallIn 1.3s cubic-bezier(.2,.8,.2,1) both,fallDrip 2.8s linear infinite}
+.acard::after{-webkit-mask-image:radial-gradient(120% 100% at 100% 0%,#000 20%,transparent 72%),linear-gradient(180deg,transparent 0,#000 45%,transparent 100%);
+  mask-image:radial-gradient(120% 100% at 100% 0%,#000 20%,transparent 72%),linear-gradient(180deg,transparent 0,#000 45%,transparent 100%);
+  -webkit-mask-size:100% 100%,100% 6.4rem;mask-size:100% 100%,100% 6.4rem;
+  animation:fallIn 1.3s .15s cubic-bezier(.2,.8,.2,1) both,fallDrip2 2.2s -1.1s linear infinite}
+@keyframes fallIn{from{transform:translateY(-105%);opacity:0}to{transform:none;opacity:1}}
+@keyframes fallDrip{from{-webkit-mask-position:0 0,0 0;mask-position:0 0,0 0}to{-webkit-mask-position:0 0,0 8rem;mask-position:0 0,0 8rem}}
+@keyframes fallDrip2{from{-webkit-mask-position:0 0,0 0;mask-position:0 0,0 0}to{-webkit-mask-position:0 0,0 6.4rem;mask-position:0 0,0 6.4rem}}
+
+/* --- selector de documento (DNI / CUIT / CUIL) de vidrio --- */
+.dbtn{background:rgba(255,255,255,.07);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.dmenu{border-radius:1.1rem;border:1px solid rgba(255,255,255,.26);background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.04)),rgba(22,14,8,.84);-webkit-backdrop-filter:blur(26px) saturate(180%);backdrop-filter:blur(26px) saturate(180%);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 24px 50px -14px rgba(0,0,0,.85);padding:.4rem;z-index:40}
+.dmenu button{border-radius:.75rem}
+.dmenu button:hover,.dmenu button:focus-visible{background:rgba(255,255,255,.12);outline:0}
+.dmenu button.on{background:var(--mango-soft);color:var(--fg);box-shadow:inset 0 0 0 1px rgba(255,154,31,.45)}
+
+/* --- portal: botones de gestiones más chicos y prolijos --- */
+.gest .acts{gap:.5rem}
+.gest .acts .btn,.gest .btn.pay{padding:.5rem .8rem;font-size:.8rem;font-weight:600;gap:.4rem;min-height:2.3rem;border-radius:999px}
+.gest .acts .btn svg,.gest .btn.pay svg{width:14px;height:14px}
+.gest .btn.pay{padding:.5rem 1.1rem;font-size:.84rem;font-weight:700;width:auto;justify-self:start}
+.gest .fee .btn{padding:.5rem .95rem;font-size:.82rem}
+.btn-pay{animation:payBg 4s ease-in-out infinite alternate;box-shadow:0 6px 16px -8px rgba(39,196,111,.55),inset 0 1px 0 rgba(255,255,255,.5)}
+
+/* --- portal: barra inferior tipo app (celular) --- */
+@media(max-width:860px){
+  .side{position:fixed;left:0;right:0;top:auto;bottom:0;z-index:45;padding:.4rem .5rem calc(env(safe-area-inset-bottom,0px) + .4rem);gap:.1rem;border-radius:1.4rem 1.4rem 0 0;border-width:1px 0 0;overflow:visible;background:rgba(14,9,5,.8);-webkit-backdrop-filter:blur(26px) saturate(170%);backdrop-filter:blur(26px) saturate(170%);box-shadow:0 -14px 40px -16px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.14)}
+  .side button{flex-direction:column;justify-content:center;align-items:center;gap:.18rem;padding:.45rem .1rem .4rem;font-size:.68rem;font-weight:600;text-align:center;border-radius:1rem}
+  .side button svg{width:22px;height:22px}
+  .side button[aria-selected="true"]{color:var(--yellow)}
+  .portal{padding-bottom:calc(6rem + env(safe-area-inset-bottom,0px))}
+  body[data-view="portal"] .toast{bottom:calc(env(safe-area-inset-bottom,0px) + 5.6rem)}
+}
+
+/* --- portal: Más (perfil, plan con corona, estafas al final) --- */
+.plancard{position:relative;overflow:hidden;isolation:isolate;border-color:rgba(255,196,58,.5);background:linear-gradient(140deg,rgba(255,196,58,.2),rgba(255,90,43,.1)),var(--glass)}
+.plancard::after{content:"";position:absolute;top:-30%;bottom:-30%;left:-60%;width:35%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);transform:skewX(-20deg);animation:planSweep 4.2s ease-in-out infinite;pointer-events:none;z-index:-1}
+@keyframes planSweep{0%{left:-60%}55%,100%{left:140%}}
+.plw{display:flex;align-items:center;gap:.8rem}
+.crown{display:inline-block;font-size:1.9rem;line-height:1;transform-origin:50% 90%;filter:drop-shadow(0 6px 10px rgba(255,150,30,.5));animation:crownBob 2.8s ease-in-out infinite}
+@keyframes crownBob{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-.22rem) rotate(6deg)}}
+.pmain>.scam{margin-top:.2rem}
+@media(max-width:560px){
+  .prof{flex-direction:column;text-align:center;gap:.7rem;padding-block:1.4rem}
+  .prof .pinfo{flex:none}
+  .prof .pinfo b,.prof .pinfo small{display:block}
+  .prof .pav{width:5.2rem;height:5.2rem;font-size:1.9rem}
+}
+
+/* --- portal: avatar arriba con menú de cuenta --- */
+.only-portal{position:relative}
+body:not([data-view="portal"]) .only-portal{display:none}
+body[data-view="portal"] #nav-exit{display:none}
+.navav{width:2.5rem;height:2.5rem;padding:0;border:1.5px solid rgba(255,255,255,.5);cursor:pointer;font-size:1.05rem}
+.navav[aria-expanded="true"]{box-shadow:0 0 0 3px rgba(255,154,31,.45)}
+.nmenu{position:absolute;right:0;top:calc(100% + .6rem);width:min(19rem,calc(100vw - 2rem));padding:.5rem;display:grid;gap:.15rem;z-index:60;border-radius:1.2rem;border:1px solid rgba(255,255,255,.26);background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.04)),rgba(22,14,8,.95);-webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 24px 50px -14px rgba(0,0,0,.85)}
+.nmenu[hidden]{display:none}
+.nm-h{display:flex;align-items:center;gap:.7rem;padding:.55rem .6rem .8rem;border-bottom:1px solid var(--line);margin-bottom:.3rem}
+.nm-h b{display:block;font-family:var(--f-display);line-height:1.2}
+.nm-h small{color:var(--muted);font-size:.74rem}
+.nm-i{display:flex;align-items:center;gap:.7rem;width:100%;padding:.7rem;border-radius:.8rem;font:inherit;font-weight:600;font-size:.92rem;color:var(--fg);background:transparent;border:0;text-align:left;text-decoration:none;cursor:pointer}
+.nm-i:hover,.nm-i:focus-visible{background:rgba(255,255,255,.1);outline:0}
+.nm-i svg{flex:none;color:var(--yellow)}
+.nm-i small{display:block;color:var(--muted);font-weight:500;font-size:.74rem}
+.nm-i.lo,.nm-i.lo svg{color:var(--warn)}
+.nm-i.nm-static{cursor:default}.nm-i.nm-static:hover{background:transparent}
+
+/* --- portal: ahorro en barras --- */
+.ah-svg .ah-bar{transform-box:fill-box;transform-origin:bottom;animation:grow .85s cubic-bezier(.2,.8,.2,1) var(--d,0s) both}
+.ah-svg.still .ah-bar{animation:none}
+.ah-svg .ah-b{transition:opacity .2s}
+.ah-l i,.ah-l i.d{width:.7rem;height:.7rem;border-radius:3px}
+.ah-l i.d{background:linear-gradient(180deg,#4ADE96,#1FA866)}
+.ah-l i:not(.d){background:linear-gradient(180deg,#FFD34A,#FF6A2B)}
+
+@media(prefers-reduced-motion:reduce){.pc.flip.in,.crown,.plancard::after,.acard::before,.acard::after,.ah-svg .ah-bar{animation:none!important}.pc.flip{opacity:1}}
+
+/* ===== ajustes v3 ===== */
+
+/* --- fondo con luminosidad: luces que respiran y se desplazan (web inicial y registro) --- */
+.bg i{will-change:transform,opacity}
+.bg i:nth-child(1){animation:glowA 17s ease-in-out infinite alternate}
+.bg i:nth-child(2){animation:glowB 21s ease-in-out -5s infinite alternate}
+.bg i:nth-child(3){animation:glowC 24s ease-in-out -9s infinite alternate}
+.bg i:nth-child(4){animation:glowD 27s ease-in-out -14s infinite alternate}
+@keyframes glowA{0%{transform:translate(0,0) scale(1);opacity:.55}50%{transform:translate(7vw,6vh) scale(1.2);opacity:.95}100%{transform:translate(-3vw,12vh) scale(1.06);opacity:.7}}
+@keyframes glowB{0%{transform:translate(0,0) scale(1.05);opacity:.45}50%{transform:translate(-8vw,8vh) scale(1.22);opacity:.85}100%{transform:translate(2vw,-3vh) scale(1);opacity:.55}}
+@keyframes glowC{0%{transform:translate(0,0) scale(1);opacity:.25}50%{transform:translate(-9vw,-6vh) scale(1.25);opacity:.6}100%{transform:translate(6vw,3vh) scale(1.05);opacity:.35}}
+@keyframes glowD{0%{transform:translate(0,0) scale(1);opacity:.22}50%{transform:translate(-6vw,-10vh) scale(1.2);opacity:.55}100%{transform:translate(4vw,4vh) scale(1);opacity:.3}}
+.bg::after{content:"";position:absolute;inset:-25%;background:linear-gradient(115deg,transparent 42%,rgba(255,196,90,.09) 50%,transparent 58%);transform:translateX(-45%);animation:beam 15s ease-in-out infinite}
+@keyframes beam{0%{transform:translateX(-45%)}60%,100%{transform:translateX(45%)}}
+
+/* --- precios: $5.000 y 10% un poco más grandes --- */
+.pc .amt{font-size:clamp(2.8rem,6.2vw,3.9rem)}
+.pc .amt small{font-size:1.05rem}
+
+/* --- corona en Manguito Plus; botón con efecto --- */
+.plancard .crown{display:none}
+.plancard.plus .crown{display:inline-block}
+.crown.sm{font-size:1.05rem;margin-right:.35rem;vertical-align:-.12em;animation-duration:3.4s}
+
+/* --- botón de WhatsApp más fino --- */
+.side .wa{padding:.45rem .85rem;font-size:.8rem;font-weight:600;gap:.4rem;margin-top:.4rem}
+.side .wa svg,.fee a.btn-ghost svg{width:15px;height:15px}
+.fee a.btn-ghost{padding:.45rem .9rem;font-size:.8rem;font-weight:600}
+
+/* --- gestiones: estados por color, resumen y cancelar en rojo --- */
+.pill.rec{background:rgba(70,160,255,.18);color:#86C2FF}
+.pill.neg{background:rgba(255,154,31,.2);color:#FFB04A}
+.pill.pay{background:var(--leaf-soft);color:var(--leaf)}
+.gsum{display:flex;flex-wrap:wrap;gap:.45rem}
+.gsum:empty{display:none}
+.gchip{display:inline-flex;align-items:center;gap:.45rem;padding:.35rem .8rem;border-radius:999px;font-size:.78rem;font-weight:600;border:1px solid transparent}
+.gchip b{font-family:var(--f-display);font-size:.95rem}
+.gchip.pay{background:var(--leaf-soft);color:var(--leaf);border-color:rgba(74,222,150,.35)}
+.gchip.neg{background:rgba(255,154,31,.16);color:#FFB04A;border-color:rgba(255,154,31,.4)}
+.gchip.rec{background:rgba(70,160,255,.14);color:#86C2FF;border-color:rgba(70,160,255,.4)}
+.grest{gap:.7rem}
+.grest .gest-h h3{font-size:1rem}
+.btn.dng{background:rgba(242,64,44,.16);color:#FF8A78;border-color:rgba(242,64,44,.6)}
+.btn.dng:hover{background:rgba(242,64,44,.28);color:#FFB0A3}
+
+@media(prefers-reduced-motion:reduce){.bg i,.bg::after{animation:none}}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -820,6 +990,15 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
     <div class="links only-home"><a href="#como">Cómo funciona</a><a href="#calculadora">Calculadora</a><a href="#comparador">Comparador</a><a href="#precios">Precios</a><a href="#seguridad">Seguridad</a><a href="#faq">Preguntas</a></div>
     <div class="only-home"><a class="btn btn-primary btn-shine" href="#registro" id="nav-cta">Empezar gratis</a></div>
     <div class="only-app"><a class="btn btn-ghost" href="#top" id="nav-exit">Salir</a></div>
+    <div class="only-portal">
+      <button type="button" class="av navav" id="nav-av" aria-haspopup="menu" aria-expanded="false" aria-controls="nav-menu" aria-label="Tu cuenta">M</button>
+      <div class="nmenu" id="nav-menu" role="menu" hidden>
+        <div class="nm-h"><div class="av" id="nm-av">M</div><div><b id="nm-name">Tu cuenta</b><small>Portal de clientes</small></div></div>
+        <button type="button" class="nm-i" role="menuitem" data-go="mas" data-sec="1"><span data-i="shield"></span>Seguridad</button>
+        <div class="nm-i nm-static"><span data-i="clock"></span><span>Última conexión<small class="mut" id="lastc">–</small></span></div>
+        <button type="button" class="nm-i lo" role="menuitem" data-act="logout"><span data-i="logout"></span>Cerrar sesión</button>
+      </div>
+    </div>
   </div>
 </div></nav>
 
@@ -988,14 +1167,14 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
     <div class="glass pc"><span class="tagp">Por resultado</span><div class="amt">10%<small> del ahorro</small></div><p>Un solo pago, solo cuando logramos bajar tu factura. Ideal para resolver un servicio.</p>
       <ul><li>$0 si no conseguimos una reducción</li><li>Buscamos el mayor ahorro posible, sin garantizar un porcentaje</li><li>Sin pedir contraseñas ni datos bancarios</li></ul>
       <a class="btn btn-ghost" href="#registro" style="justify-self:start">Empezar gratis</a></div>
-    <div class="glass pc feat"><span class="tagp">Manguito Plus · opcional</span><span class="for">Pensado para más de un servicio</span><div class="amt">$5.000<small> por mes</small></div><p>Con varios servicios, el ahorro mensual supera con holgura la cuota. Con uno solo, conviene el pago por resultado.</p>
+    <div class="glass pc feat"><span class="tagp"><span class="crown sm" aria-hidden="true">👑</span>Manguito Plus · opcional</span><span class="for">Pensado para más de un servicio</span><div class="amt">$5.000<small> por mes</small></div><p>Con varios servicios, el ahorro mensual supera con holgura la cuota. Con uno solo, conviene el pago por resultado.</p>
       <div class="fit"><h4>¿Cuál me conviene?</h4>
         <div class="r"><span>Tengo 1 servicio<small>Por ejemplo, solo el celular</small></span><span class="pill wait">Por resultado</span></div>
         <div class="r"><span>Tengo 2 o más servicios<small>Por ejemplo, internet y dos celulares</small></span><span class="pill go">Manguito Plus</span></div>
         <div class="r"><span>No quiero que se me venzan las promociones</span><span class="pill go">Manguito Plus</span></div>
       </div>
       <ul><li>Renovamos tus promociones antes de que venzan</li><li>Negociación constante con las compañías</li><li>Todos tus servicios en un solo panel</li><li>Cancelás cuando quieras, con un clic</li></ul>
-      <a class="btn btn-primary" href="#registro" style="justify-self:start">Activar Manguito Plus</a></div>
+      <a class="btn btn-primary btn-shine" href="#registro" style="justify-self:start">Activar Manguito Plus</a></div>
   </div>
 </div></section>
 
@@ -1197,6 +1376,7 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
     <div data-panel="gestiones" class="pmain" hidden>
       <div class="phead"><div><h2>Gestiones</h2><p>Seguimiento de tus reclamos de ahorro.</p></div></div>
       <div class="qc" id="gtabs"></div>
+      <div class="gsum" id="gsum"></div>
       <div class="pmain" id="glist"></div>
       <p class="fine" id="gempty" hidden>Todavía no tenés gestiones en esta sección.</p>
       <div class="fee"><div><b>¿Dudas con una gestión?</b><small>Hablá con un asesor en tiempo real.</small></div><a class="btn btn-ghost" href="https://wa.me/5491158214819?text=Hola,%20tengo%20una%20consulta%20sobre%20mis%20gestiones%20en%20Manguito" target="_blank" rel="noopener noreferrer"><span data-i="whatsapp"></span>WhatsApp</a></div>
@@ -1219,24 +1399,19 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
     </div>
     <div data-panel="mas" class="pmain" hidden>
       <div class="phead"><div><h2>Más</h2><p>Tu perfil, tu plan, ayuda y seguridad.</p></div></div>
-      <div class="glass pcard prof"><div class="pav" id="pav">M</div><div class="pinfo"><b id="pf-name">Tu cuenta</b><small class="mut">Perfil</small></div><button class="btn btn-ghost sm" type="button" data-act="photo"><span data-i="upload"></span>Subir foto</button></div>
-      <div class="glass pcard"><div class="gest-h"><div><small class="eb">Mi plan</small><h3 id="plan-n">Plan Gratis</h3></div><span class="pill go" id="plan-p">Gratis</span></div><button class="btn btn-primary" type="button" data-act="plan">Gestionar plan</button></div>
+      <div class="glass pcard prof"><div class="pav" id="pav">M</div><div class="pinfo"><b id="pf-name">Tu cuenta</b></div><button class="btn btn-ghost sm" type="button" data-act="photo"><span data-i="upload"></span>Subir foto</button></div>
+      <div class="glass pcard plancard"><div class="gest-h"><div class="plw"><span class="crown" aria-hidden="true">👑</span><div><small class="eb">Mi plan</small><h3 id="plan-n">Plan Gratis</h3></div></div><span class="pill go" id="plan-p">Gratis</span></div><button class="btn btn-primary" type="button" data-act="plan">Gestionar plan</button></div>
       <div class="two">
         <button class="glass rowc" type="button" data-act="tickets"><span class="ico" data-i="ticket" data-s="20"></span><div><b>Mis tickets</b><small>Tus últimas gestiones</small></div><span data-i="right"></span></button>
         <a class="glass rowc" href="https://wa.me/5491158214819?text=Hola,%20necesito%20soporte%20con%20mi%20cuenta%20de%20Manguito" target="_blank" rel="noopener noreferrer"><span class="ico wab" data-i="whatsapp" data-s="20"></span><div><b>Soporte</b><small>Escribinos por WhatsApp</small></div><span data-i="right"></span></a>
       </div>
-      <div class="glass pcard"><h3>Seguridad</h3>
+      <div class="glass pcard" id="sec"><h3>Seguridad</h3>
         <div>
           <button class="lk" type="button" data-act="pwd"><span data-i="lock"></span>Cambiar contraseña<span class="sp"></span><span data-i="right"></span></button>
           <button class="lk" type="button" data-act="2fa"><span data-i="shield"></span><span>Verificación en dos pasos<small class="mut" id="tf-s">Desactivada</small></span><span class="sp"></span><span class="pill wait" id="tf-p">Configurar</span></button>
         </div>
-        <div class="scam" role="note"><b>Cuidate de las estafas</b><p>Manguito nunca te va a llamar ni a pedirte tus claves, el token o los códigos que recibís por SMS. Tampoco te vamos a pedir que transfieras dinero para «proteger tu cuenta». Si alguien lo hace, cortá: es una estafa. Contanos únicamente desde <a href="https://wa.me/5491158214819?text=Hola,%20quiero%20reportar%20un%20intento%20de%20estafa" target="_blank" rel="noopener noreferrer">Soporte</a>.</p></div>
       </div>
-      <div class="glass pcard">
-        <a class="lk" href="#top"><span data-i="home"></span>Volver a la página principal</a>
-        <div class="lk"><span data-i="clock"></span><span>Última conexión<small class="mut" id="lastc">–</small></span></div>
-        <button class="lk lo" type="button" data-act="logout"><span data-i="logout"></span>Cerrar sesión</button>
-      </div>
+      <div class="scam" role="note"><b>Cuidate de las estafas</b><p>Manguito nunca te va a llamar ni a pedirte tus claves, el token o los códigos que recibís por SMS. Tampoco te vamos a pedir que transfieras dinero para «proteger tu cuenta». Si alguien lo hace, cortá: es una estafa. Contanos únicamente desde <a href="https://wa.me/5491158214819?text=Hola,%20quiero%20reportar%20un%20intento%20de%20estafa" target="_blank" rel="noopener noreferrer">Soporte</a>.</p></div>
     </div>
   </div>
 </div></div></div>
@@ -1302,8 +1477,8 @@ button.rowc{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
 <div class="modal" id="m-plan"><div class="mbox">
   <div class="mhead"><h3>Gestionar plan</h3><button class="x" type="button" data-act="close" data-m="m-plan" aria-label="Cerrar"><span data-i="close"></span></button></div>
   <div class="glass pcard" id="pl-free"><div class="gest-h"><b>Plan Gratis</b><span class="pill go">Por resultado</span></div><p class="mut">Pagás el 10% del ahorro, una sola vez. Si no bajamos tu factura, no pagás.</p></div>
-  <div class="glass pcard" id="pl-plus"><div class="gest-h"><b>Manguito Plus</b><span class="pill wait">$5.000 por mes</span></div><p class="mut">Renovamos tus promociones antes de que venzan, negociamos de forma constante con las compañías y ves todos tus servicios en un solo panel. Cancelás cuando quieras, con un clic.</p></div>
-  <button class="btn btn-primary" type="button" data-act="planset" id="pl-btn">Activar Manguito Plus</button>
+  <div class="glass pcard" id="pl-plus"><div class="gest-h"><b><span class="crown sm" aria-hidden="true">👑</span>Manguito Plus</b><span class="pill wait">$5.000 por mes</span></div><p class="mut">Renovamos tus promociones antes de que venzan, negociamos de forma constante con las compañías y ves todos tus servicios en un solo panel. Cancelás cuando quieras, con un clic.</p></div>
+  <button class="btn btn-primary btn-shine" type="button" data-act="planset" id="pl-btn">Activar Manguito Plus</button>
 </div></div>
 <div class="modal" id="m-pwd"><div class="mbox">
   <div class="mhead"><h3>Cambiar contraseña</h3><button class="x" type="button" data-act="close" data-m="m-pwd" aria-label="Cerrar"><span data-i="close"></span></button></div>
@@ -2862,7 +3037,7 @@ return{svg:function(text){var q=new Q(-1,L.M);q.addData(text);q.make();var n=q.g
   /* estados de una gestión */
   function stIdx(s){s=String(s||'').toLowerCase();if(/procesada|finalizada|con ahorro|activo/.test(s))return 3;if(/esperando pago|comisi|pago/.test(s))return 2;if(/negociac|negociando/.test(s))return 1;return 0}
   function meta(s){if(/cancel/i.test(s||''))return{i:-1,st:'Cancelada',k:'bad',t:'fin',m:'Gestión cancelada.'};
-    return[{i:0,st:'Recibida',k:'new',t:'act',m:'Revisamos tu factura para validar consumos.'},{i:1,st:'Negociando',k:'new',t:'act',m:'Hablamos con la empresa para aplicar la rebaja.'},{i:2,st:'Esperando pago',k:'wait',t:'act',m:'Tu descuento ya está listo: completá el pago de la comisión para aplicarlo.'},{i:3,st:'Descuento activo',k:'go',t:'fin',m:'Descuento aplicado con éxito en tu factura.'}][stIdx(s)]}
+    return[{i:0,st:'Recibida',k:'rec',t:'act',m:'Revisamos tu factura para validar consumos.'},{i:1,st:'Negociando',k:'neg',t:'act',m:'Hablamos con la empresa para aplicar la rebaja.'},{i:2,st:'Esperando pago',k:'pay',t:'act',m:'Tu descuento ya está listo: completá el pago de la comisión para aplicarlo.'},{i:3,st:'Descuento activo',k:'go',t:'fin',m:'Descuento aplicado con éxito en tu factura.'}][stIdx(s)]}
   function src(){return T.length?T:demoT}
   function cm(t){return t.commission_amount?+t.commission_amount:Math.round((+t.estimated_saving||0)*COMM)}
   function isPay(t){return meta(t.current_step).i===2&&t.payment_status!=='pagado'}
@@ -2913,24 +3088,24 @@ return{svg:function(text){var q=new Q(-1,L.M);q.addData(text);q.make();var n=q.g
     var none=!(A+P);$('ah-body').hidden=none;$('ah-empty').hidden=!none;$('ah-sub').hidden=none;$('ah-pill').hidden=none;
     if(none)return;
     var top=(A+P)*n,Y=niceMax(top),now=new Date(),cur=now.getMonth();
-    function X(k){return L+pw*k/n}function V(v){return T+ph*(1-v/Y)}
-    var g='',lab='',pa='',pp='',k;
+    var slot=pw/n,bw=P?Math.max(6,Math.min(slot*.34,22)):Math.max(8,Math.min(slot*.52,30)),gp=3;
+    function X(k){return L+slot*(k-.5)}function V(v){return T+ph*(1-v/Y)}
+    var g='',lab='',bars='',k;
     for(i=0;i<=4;i++){var yv=Y*i/4,yy=V(yv);g+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+yy+'" y2="'+yy+'" stroke="rgba(255,226,180,'+(i?'.1':'.22')+')"/><text x="'+(L-6)+'" y="'+(yy+3)+'" text-anchor="end">'+(i?kM(yv):'$0')+'</text>'}
-    for(k=0;k<=n;k++){lab+='<text x="'+X(k)+'" y="'+(H-8)+'" text-anchor="middle">'+(k?MS[(cur+k)%12]:'Hoy')+'</text>';pa+=(k?'L':'M')+X(k)+' '+V(A*k)+' ';pp+=(k?'L':'M')+X(k)+' '+V((A+P)*k)+' '}
-    var area=pa+'L'+X(n)+' '+V(0)+' L'+X(0)+' '+V(0)+' Z';
-    var pl=P?'<path d="'+pp+'" fill="none" stroke="#4ADE96" stroke-width="2" stroke-linecap="round" opacity=".9" style="stroke-dasharray:5 4"/>':'';
-    svg.setAttribute('class','ah-svg'+(ahDone?' still':''));
-    svg.innerHTML='<defs><linearGradient id="ahF" gradientUnits="userSpaceOnUse" x1="0" y1="'+T+'" x2="0" y2="'+(T+ph)+'"><stop offset="0" stop-color="#FF9A1F" stop-opacity=".5"/><stop offset="1" stop-color="#FF9A1F" stop-opacity="0"/></linearGradient><linearGradient id="ahS" gradientUnits="userSpaceOnUse" x1="'+L+'" y1="0" x2="'+(W-R)+'" y2="0"><stop offset="0" stop-color="#FFD34A"/><stop offset=".55" stop-color="#FF9A1F"/><stop offset="1" stop-color="#FF5A2B"/></linearGradient></defs>'+g+lab+
-      '<path class="ah-area" d="'+area+'" fill="url(#ahF)"/>'+pl+
-      '<path d="'+pa+'" pathLength="100" class="line-a" fill="none" stroke="url(#ahS)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>'+
-      '<g id="ah-mk"><line id="ah-mkl" y1="'+T+'" y2="'+(T+ph)+'" stroke="rgba(255,255,255,.35)" stroke-dasharray="3 3"/>'+(P?'<circle id="ah-mkp" r="4" fill="#4ADE96" stroke="#0b0805" stroke-width="1.5"/>':'')+'<circle id="ah-mka" r="4.5" fill="#FFB13B" stroke="#0b0805" stroke-width="1.5"/></g>';
-    function show(k){
-      var x=X(k),a=$('ah-mka'),p=$('ah-mkp');$('ah-mkl').setAttribute('x1',x);$('ah-mkl').setAttribute('x2',x);a.setAttribute('cx',x);a.setAttribute('cy',V(A*k));if(p){p.setAttribute('cx',x);p.setAttribute('cy',V((A+P)*k))}
-      var when=k?'En '+k+(k===1?' mes':' meses')+' ('+MES[(cur+k)%12]+')':'Hoy';
-      $('ah-note').innerHTML=when+': <b>'+M(A*k)+'</b> ahorrados con tus descuentos activos'+(P?' · <b style="color:var(--leaf)">'+M((A+P)*k)+'</b> sumando las gestiones en curso':'');
+    for(k=1;k<=n;k++){
+      var ya=V(A*k),yp=V((A+P)*k),xa=P?X(k)-bw-gp/2:X(k)-bw/2,xp=X(k)+gp/2;
+      lab+='<text x="'+X(k)+'" y="'+(H-8)+'" text-anchor="middle">'+MS[(cur+k)%12]+'</text>';
+      bars+='<g class="ah-b" data-k="'+k+'" style="--d:'+(.07*k).toFixed(2)+'s"><rect class="ah-bar" x="'+xa+'" y="'+ya+'" width="'+bw+'" height="'+Math.max(0,V(0)-ya)+'" rx="3" fill="url(#ahB)"/>'+(P?'<rect class="ah-bar" x="'+xp+'" y="'+yp+'" width="'+bw+'" height="'+Math.max(0,V(0)-yp)+'" rx="3" fill="url(#ahG)" opacity=".92"/>':'')+'</g>';
     }
-    function at(e){var r=svg.getBoundingClientRect();return Math.max(0,Math.min(n,Math.round(((e.clientX-r.left)/r.width*W-L)/(pw/n))))}
-    svg.onpointermove=function(e){show(at(e))};svg.onpointerdown=function(e){show(at(e))};svg.onpointerleave=function(){show(n)};
+    svg.setAttribute('class','ah-svg'+(ahDone?' still':''));
+    svg.innerHTML='<defs><linearGradient id="ahB" gradientUnits="userSpaceOnUse" x1="0" y1="'+T+'" x2="0" y2="'+(T+ph)+'"><stop offset="0" stop-color="#FFD34A"/><stop offset="1" stop-color="#FF6A2B"/></linearGradient><linearGradient id="ahG" gradientUnits="userSpaceOnUse" x1="0" y1="'+T+'" x2="0" y2="'+(T+ph)+'"><stop offset="0" stop-color="#7CF5B5"/><stop offset="1" stop-color="#1FA866"/></linearGradient></defs>'+g+lab+bars;
+    function show(k,hl){
+      var when='En '+k+(k===1?' mes':' meses')+' ('+MES[(cur+k)%12]+')';
+      $('ah-note').innerHTML=when+': <b>'+M(A*k)+'</b> ahorrados con tus descuentos activos'+(P?' · <b style="color:var(--leaf)">'+M((A+P)*k)+'</b> sumando las gestiones en curso':'');
+      [].forEach.call(svg.querySelectorAll('.ah-b'),function(e){e.style.opacity=(!hl||+e.getAttribute('data-k')===k)?1:.4});
+    }
+    function at(e){var r=svg.getBoundingClientRect();return Math.max(1,Math.min(n,Math.ceil(((e.clientX-r.left)/r.width*W-L)/slot)))}
+    svg.onpointermove=function(e){show(at(e),true)};svg.onpointerdown=function(e){show(at(e),true)};svg.onpointerleave=function(){show(n,false)};
     show(n);
     $('ah-l2').hidden=!P;$('ah-pt').hidden=!P;
     $('ah-m').textContent=M(A);$('ah-t').textContent=M(A*n);$('ah-p').textContent=M((A+P)*n);
@@ -2946,7 +3121,7 @@ return{svg:function(text){var q=new Q(-1,L.M);q.addData(text);q.make();var n=q.g
     var inv=t.invoice_id?'<a class="btn btn-ghost" href="/api/invoices/'+encodeURIComponent(t.invoice_id)+'/file" target="_blank" rel="noopener">'+ic('file')+'Ver factura '+ic('download')+'</a>':'<button type="button" class="btn btn-ghost" data-act="toast" data-msg="Factura digital procesada por el sistema.">'+ic('file')+'Ver factura '+ic('download')+'</button>';
     var cb='<button type="button" class="btn btn-ghost sm dng" data-act="cancel" data-id="'+id+'">'+ic('trash')+'Cancelar'+(i===1?' gestión':'')+'</button>',b='';
     if(i===2&&!paid)b='<div class="info">'+ic('lock')+'<span>Tu descuento ya está listo: completá el pago de la comisión para aplicarlo.</span></div>';
-    else if(i===0)b='<div class="fee"><div><b>¿Comenzamos a negociar tu descuento?</b><small>Habilitá la negociación con '+esc(t.provider_name)+'. Sin costo si no hay rebaja.</small></div><div class="cta"><button type="button" class="btn btn-primary sm" data-act="neg" data-id="'+id+'">'+ic('bolt')+'Habilitar negociación</button>'+cb+'</div></div>';
+    else if(i===0)b='<div class="fee"><div><b>¿Comenzamos a negociar tu descuento?</b><small>Habilitá la negociación con '+esc(t.provider_name)+'. Sin costo si no hay rebaja.</small></div><div class="cta"><button type="button" class="btn btn-primary btn-shine sm" data-act="neg" data-id="'+id+'">'+ic('bolt')+'Habilitar negociación</button>'+cb+'</div></div>';
     else if(i===1)b='<div class="fee"><small>Hablamos con la empresa para aplicar la mejor tarifa.</small>'+cb+'</div>';
     else if(i===3||paid)b='<div class="info" style="color:var(--leaf)">'+ic('check')+'<span>Descuento activo y aplicado con éxito en tu factura mensual.</span></div>';
     return '<div class="gest glass"><div class="gh"><span class="ico">'+ic('card',20)+'</span><div><h3>'+esc(t.provider_name)+'<span class="pill '+m.k+'">'+m.st+'</span></h3><div class="meta"><span>Ticket #'+esc(String(t.id).slice(0,8))+'</span><span>Fecha: '+D(t.created_at)+'</span><span>Monto: '+M(t.amount)+'</span></div></div></div>'+
@@ -2956,8 +3131,15 @@ return{svg:function(text){var q=new Q(-1,L.M);q.addData(text);q.make();var n=q.g
   function drawG(){
     var S=src(),a=S.filter(function(t){return meta(t.current_step).t==='act'}).length;
     $('gtabs').innerHTML=[['todas','Todas ('+S.length+')'],['act','En curso ('+a+')'],['fin','Finalizadas ('+(S.length-a)+')']].map(function(x){return '<button type="button" data-t="'+x[0]+'"'+(gf===x[0]?' class="on"':'')+'>'+x[1]+'</button>'}).join('');
-    var L=S.filter(function(t){return gf==='todas'||meta(t.current_step).t===gf});
-    $('gempty').hidden=L.length>0;$('glist').innerHTML=L.map(card).join('');paint($('glist'));
+    function pr(t){var m=meta(t.current_step);if(m.i===2&&t.payment_status!=='pagado')return 0;if(m.i===1)return 1;if(m.i===0)return 2;return 3}
+    var L=S.filter(function(t){return gf==='todas'||meta(t.current_step).t===gf}).sort(function(x,y){return pr(x)-pr(y)});
+    var c=[0,0,0];S.forEach(function(t){var p=pr(t);if(p<3)c[p]++});
+    $('gsum').innerHTML=[['pay','Para pagar comisión',c[0]],['neg','Negociando',c[1]],['rec','Recibidas',c[2]]].filter(function(x){return x[2]}).map(function(x){return '<span class="gchip '+x[0]+'"><b>'+x[2]+'</b>'+x[1]+'</span>'}).join('');
+    var top=L.slice(0,2),rest=L.slice(2);
+    function row(t){var m=meta(t.current_step);return '<div class="st" data-act="hist" data-id="'+esc(t.id)+'"><div><b>'+esc(t.provider_name)+'</b><small>'+D(t.created_at)+' · Ahorro estimado '+M(t.estimated_saving)+'</small></div><span class="pill '+m.k+'">'+m.st+'</span></div>'}
+    $('gempty').hidden=L.length>0;
+    $('glist').innerHTML=top.map(card).join('')+(rest.length?'<div class="gest glass grest"><div class="gest-h"><h3>Resto de tus gestiones</h3><span class="pill new">'+rest.length+'</span></div><p class="mut" style="font-size:.84rem">Tocá una para ver el detalle completo.</p><div class="list">'+rest.map(row).join('')+'</div></div>':'');
+    paint($('glist'));
   }
   $('gtabs').addEventListener('click',function(e){var b=e.target.closest('[data-t]');if(b){gf=b.dataset.t;drawG()}});
   /* calendario */
@@ -3124,7 +3306,7 @@ return{svg:function(text){var q=new Q(-1,L.M);q.addData(text);q.make();var n=q.g
           if(!beat){beat=true;setInterval(function(){fetch('/api/presence/heartbeat',{method:'POST',credentials:'include'}).catch(function(){})},60000)}}}}catch(e){}
     await loadAll();
   }
-  function drawPlan(){var pl=PLAN==='plus',p=$('plan-p');$('plan-n').textContent=pl?'Manguito Plus':'Plan Gratis';p.textContent=pl?'$5.000/mes':'Gratis';p.className='pill '+(pl?'wait':'go');$('k-plan').textContent=pl?'Activo':'Inactivo';
+  function drawPlan(){var pl=PLAN==='plus',p=$('plan-p');$('plan-n').textContent=pl?'Manguito Plus':'Plan Gratis';p.textContent=pl?'$5.000/mes':'Gratis';p.className='pill '+(pl?'wait':'go');$('plan-n').closest('.plancard').classList.toggle('plus',pl);$('pl-btn').classList.toggle('btn-shine',!pl);$('k-plan').textContent=pl?'Activo':'Inactivo';
     $('pl-free').classList.toggle('cur',!pl);$('pl-plus').classList.toggle('cur',pl);$('pl-btn').textContent=pl?'Volver al plan Gratis':'Activar Manguito Plus'}
   function setPhoto(u){photoUrl=u;['p-av','pav'].forEach(function(id){var e=$(id);e.style.backgroundImage='url("'+u+'")';e.classList.add('ph');e.textContent=''})}
   $('photo').addEventListener('change',function(){var f=this.files&&this.files[0];this.value='';if(!f)return;
@@ -3305,7 +3487,9 @@ return{svg:function(text){var q=new Q(-1,L.M);q.addData(text);q.make();var n=q.g
     bar.addEventListener('click',function(e){e.stopPropagation()});
     v.addEventListener('timeupdate',function(){if(!seeking&&v.duration)sk.value=Math.round(v.currentTime/v.duration*1000);tt.textContent=tfmt(v.currentTime)});
     ['play','pause','volumechange','loadedmetadata'].forEach(function(n){v.addEventListener(n,icons)});
-    v.addEventListener('click',toggle);
+    var ctlT;function showCtl(){box.classList.add('ctl');clearTimeout(ctlT);ctlT=setTimeout(function(){box.classList.remove('ctl')},2800)}
+    v.addEventListener('click',function(){if(i!==cur)return;if(box.classList.contains('playing')&&!box.classList.contains('ctl')){showCtl();return}toggle()});
+    bar.addEventListener('click',function(){if(box.classList.contains('playing'))showCtl()});
     icons();
   });
   setBig(false);
@@ -3433,5 +3617,41 @@ return{svg:function(text){var q=new Q(-1,L.M);q.addData(text);q.make();var n=q.g
   })});
   q.addEventListener('input',render);co.addEventListener('change',render);od.addEventListener('change',render);
   render();
+})();
+</script>
+
+<script>
+/* ---- menú de cuenta (avatar), sincronizado con el avatar del portal ---- */
+(function(){
+  var av=document.getElementById('nav-av'),mn=document.getElementById('nav-menu'),src=document.getElementById('p-av'),nm=document.getElementById('nm-av');
+  if(!av||!mn||!src)return;
+  function set(o){mn.hidden=!o;av.setAttribute('aria-expanded',o?'true':'false')}
+  function sync(){
+    [av,nm].forEach(function(e){if(!e)return;e.textContent=src.textContent;e.style.backgroundImage=src.style.backgroundImage;e.classList.toggle('ph',src.classList.contains('ph'))});
+    var n=document.getElementById('p-name'),t=document.getElementById('nm-name');if(n&&t)t.textContent=n.textContent;
+  }
+  sync();
+  var mo=new MutationObserver(sync);
+  mo.observe(src,{attributes:true,childList:true,characterData:true,subtree:true});
+  var pn=document.getElementById('p-name');if(pn)mo.observe(pn,{childList:true,characterData:true,subtree:true});
+  av.addEventListener('click',function(e){e.stopPropagation();set(mn.hidden)});
+  document.addEventListener('click',function(e){if(!mn.hidden&&!mn.contains(e.target)&&e.target!==av)set(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!mn.hidden){set(false);av.focus()}});
+  window.addEventListener('hashchange',function(){set(false)});
+  mn.addEventListener('click',function(e){
+    var b=e.target.closest('[data-go],[data-act],a');if(!b)return;
+    set(false);
+    if(b.hasAttribute('data-sec'))setTimeout(function(){var s=document.getElementById('sec');if(s)s.scrollIntoView({behavior:'smooth',block:'start'})},80);
+  });
+})();
+
+/* ---- precios: tarjetas que se dan vuelta al entrar ---- */
+(function(){
+  var cards=[].slice.call(document.querySelectorAll('#precios .pc'));
+  if(!cards.length||!('IntersectionObserver' in window))return;
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  cards.forEach(function(c,i){c.classList.add('flip');c.style.setProperty('--fd',(i*.18)+'s')});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
+  cards.forEach(function(c){io.observe(c)});
 })();
 </script>
