@@ -56,7 +56,7 @@ h3{font-size:1.05rem;font-weight:600;letter-spacing:-.01em}
 .btn-shine:active{transform:scale(.96)}
 @keyframes shineBg{to{background-position:100% 0}}
 @keyframes sweep{0%{left:-70%}55%,100%{left:140%}}
-@keyframes glowPulse{0%,100%{box-shadow:0 12px 34px -10px rgba(255,106,43,.75),0 0 0 0 rgba(255,154,31,.55),inset 0 1px 0 rgba(255,255,255,.55)}60%{box-shadow:0 14px 40px -8px rgba(255,106,43,.95),0 0 0 12px rgba(255,154,31,0),inset 0 1px 0 rgba(255,255,255,.55)}}
+@keyframes glowPulse{0%,100%{box-shadow:0 12px 34px -10px rgba(var(--gl,255,106,43),.75),0 0 0 0 rgba(var(--gl,255,154,31),.55),inset 0 1px 0 rgba(255,255,255,.55)}60%{box-shadow:0 14px 40px -8px rgba(var(--gl,255,106,43),.95),0 0 0 12px rgba(var(--gl,255,154,31),0),inset 0 1px 0 rgba(255,255,255,.55)}}
 .btn-ghost{background:var(--glass-solid);border-color:var(--glass-line);color:var(--fg);backdrop-filter:blur(16px);box-shadow:var(--hi)}
 .btn[disabled]{opacity:.5;cursor:not-allowed;filter:none}
 a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,label:focus-within{outline:3px solid var(--yellow);outline-offset:3px}
@@ -968,6 +968,44 @@ body[data-view="portal"] #nav-exit{display:none}
 .btn.dng{background:rgba(242,64,44,.16);color:#FF8A78;border-color:rgba(242,64,44,.6)}
 .btn.dng:hover{background:rgba(242,64,44,.28);color:#FFB0A3}
 
+/* ---- slogan: "mango" <-> mango icon swap ---- */
+.slogan{gap:.32em;flex-wrap:wrap}
+.swap{display:inline-grid;place-items:center;perspective:420px;position:relative}
+.swap>*{grid-area:1/1;backface-visibility:hidden;transform-origin:50% 60%}
+.sw-w{animation:swW 4.4s ease-in-out infinite}
+.sw-i{animation:swI 4.4s ease-in-out infinite;filter:drop-shadow(0 4px 10px rgba(255,154,31,.55))}
+@keyframes swW{0%,42%{opacity:1;transform:rotateX(0) scale(1);filter:blur(0)}50%,92%{opacity:0;transform:rotateX(-90deg) scale(.6);filter:blur(3px)}100%{opacity:1;transform:rotateX(0) scale(1);filter:blur(0)}}
+@keyframes swI{0%,42%{opacity:0;transform:rotateX(90deg) scale(.4) rotate(-18deg)}50%,92%{opacity:1;transform:rotateX(0) scale(1.25) rotate(0)}100%{opacity:0;transform:rotateX(90deg) scale(.4) rotate(18deg)}}
+@media(prefers-reduced-motion:reduce){.sw-w{animation:none}.sw-i{display:none}}
+/* ---- CTA buttons: colour + reflection ---- */
+.btn-shine.c-sun{--gl:255,154,31;background:linear-gradient(110deg,#FFE066,#FFB020 35%,#FF8A1F 65%,#FFE066);background-size:220% 100%}
+.btn-shine.c-leaf{--gl:74,222,150;background:linear-gradient(110deg,#C6F36B,#4ADE96 38%,#19B97A 66%,#C6F36B);background-size:220% 100%;animation-delay:-1.5s,-.9s}
+.btn-shine.c-leaf::after{animation-delay:1.1s}
+.btn-shine.c-fire{--gl:255,90,43;background:linear-gradient(110deg,#FFB347,#FF6A2B 38%,#F2402C 66%,#FFB347);background-size:220% 100%;animation-delay:-3s,-1.8s}
+.btn-shine.c-fire::after{animation-delay:2.2s}
+.btn-shine.c-sun::after,.btn-shine.c-leaf::after,.btn-shine.c-fire::after{background:linear-gradient(100deg,transparent,rgba(255,255,255,.95),transparent)}
+.btn-shine.c-sun,.btn-shine.c-leaf,.btn-shine.c-fire{color:var(--ink);border-color:rgba(255,255,255,.4)}
+/* ---- background: yellow fades to mango-green on the ticket section ---- */
+body{--g:0}
+.bg i:nth-child(2){opacity:calc(.6*(1 - var(--g)*.85))}
+.bg i:nth-child(5),.bg i:nth-child(6){position:absolute;border-radius:50%;filter:blur(110px)}
+.bg i:nth-child(5){width:50vw;height:50vw;right:-10vw;top:6vh;background:radial-gradient(circle,#1F7A4D,transparent 68%);opacity:calc(.4*var(--g))}
+.bg i:nth-child(6){width:42vw;height:42vw;left:-10vw;top:52vh;background:radial-gradient(circle,#6E8F2A,transparent 68%);opacity:calc(.24*var(--g))}
+
+/* ---- v2: hero CTAs all yellow, smaller, reflection only (no zoom / pulse) ---- */
+.cta-row{gap:.6rem}
+.cta-row .btn-shine{padding:.55rem 1.05rem;font-size:.86rem;gap:.4rem;animation:shineBg 4.5s ease-in-out infinite alternate;box-shadow:0 8px 20px -10px rgba(255,154,31,.7),inset 0 1px 0 rgba(255,255,255,.55);transition:filter .2s ease}
+.cta-row .btn-shine:hover,.cta-row .btn-shine:active{transform:none;filter:none}
+.cta-row .btn-shine:nth-child(2)::after{animation-delay:.5s}
+.cta-row .btn-shine:nth-child(3)::after{animation-delay:1s}
+.cta-row .bi{flex:none}
+/* plans: Plus card */
+.pc.feat .tagp{align-self:center;text-align:center}
+.pc.feat .for{justify-self:center;align-self:center;text-align:center}
+.fit .pill.go{background:rgba(74,222,150,.2);color:var(--leaf);font-weight:600}
+.fit .pill.wait{background:rgba(255,176,32,.2);color:#FFB020;font-weight:600}
+.pc.feat .btn-shine .crown{animation:none;filter:none;font-size:1rem;margin:0}
+
 @media(prefers-reduced-motion:reduce){.bg i,.bg::after{animation:none}}
 </style>
 
@@ -981,7 +1019,7 @@ body[data-view="portal"] #nav-exit{display:none}
   </defs>
 </svg>
 
-<div class="bg" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+<div class="bg" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <nav><div class="wrap">
   <div class="nav-in glass">
@@ -1008,11 +1046,11 @@ body[data-view="portal"] #nav-exit{display:none}
     <span class="eyebrow">Ahorro en servicios del hogar</span>
     <h1>Negociamos tus facturas. <span class="grad">Vos te quedás con el ahorro.</span></h1>
     <p class="lead">Un gestor con experiencia en atención al cliente de las compañías busca la mejor promoción para tu celular, internet y TV. Pagás solo si ahorrás.</p>
-    <p class="slogan"><svg class="mgo" width="30" height="30" aria-hidden="true"><use href="#mango"/></svg><span class="grad">Cada mango cuenta.</span></p>
+    <p class="slogan" aria-label="Cada mango cuenta."><span class="grad" aria-hidden="true">Cada</span><span class="swap" aria-hidden="true"><span class="sw-w grad">mango</span><svg class="mgo sw-i" width="30" height="30"><use href="#mango"/></svg></span><span class="grad" aria-hidden="true">cuenta.</span></p>
     <div class="cta-row">
-      <a class="btn btn-primary btn-shine" href="#registro">Empezar gratis</a>
-      <a class="btn btn-ghost" href="#calculadora">Calcular mi ahorro</a>
-      <a class="btn btn-ghost" href="#comparador">Comparar precios</a>
+      <a class="btn btn-primary btn-shine c-sun" href="#calculadora"><svg class="bi" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="3.5" rx=".8" fill="currentColor" stroke="none"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01" stroke-width="2.6"/></svg>Calcular mi ahorro</a>
+      <a class="btn btn-primary btn-shine c-sun" href="#comparador"><span aria-hidden="true">🌐📱</span>Comparador</a>
+      <a class="btn btn-primary btn-shine c-sun" href="#precios">Precios</a>
     </div>
     <div class="badges">
       <span class="badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Cifrado AES-256</span>
@@ -1025,8 +1063,8 @@ body[data-view="portal"] #nav-exit{display:none}
     <svg class="mgo mango-float" width="72" height="72" aria-hidden="true"><use href="#mango"/></svg>
     <div class="dash-top"><b><svg class="mgo" width="24" height="24" aria-hidden="true"><use href="#mango"/></svg>Tu panel</b><span class="live">Ejemplo en vivo</span></div>
     <div class="kpis">
-      <div class="kpi main"><small>Ahorro por mes</small><b>$14.857</b><span class="tag">-29% en tu factura</span></div>
-      <div class="kpi"><small>Ahorro en 6 meses</small><b>$89.143</b></div>
+      <div class="kpi main"><small>Ahorro por mes</small><b id="kp-mo">$14.857</b><span class="tag">-29% en tu factura</span></div>
+      <div class="kpi"><small>Ahorro en 6 meses</small><b id="kp-6">$89.143</b></div>
     </div>
     <div class="chart">
       <div class="chart-h"><span>Tu factura por mes (simulación)</span><span class="lg" role="group" aria-label="Resaltar una serie del gráfico"><button type="button" class="leg" data-s="before" aria-pressed="false"><i style="background:rgba(255,226,180,.4)"></i>Antes</button><button type="button" class="leg" data-s="with" aria-pressed="false"><i style="background:var(--mango)"></i>Con Manguito</button><button type="button" class="leg hot" data-s="acc" aria-pressed="false"><i class="ln" style="background:var(--leaf)"></i>Ahorro acumulado</button></span></div>
@@ -1171,9 +1209,10 @@ body[data-view="portal"] #nav-exit{display:none}
         <div class="r"><span>Tengo 1 servicio<small>Por ejemplo, solo el celular</small></span><span class="pill wait">Por resultado</span></div>
         <div class="r"><span>Tengo 2 o más servicios<small>Por ejemplo, internet y dos celulares</small></span><span class="pill go">Manguito Plus</span></div>
         <div class="r"><span>No quiero que se me venzan las promociones</span><span class="pill go">Manguito Plus</span></div>
+        <div class="r"><span>Quiero un calendario de vencimientos<small>Fechas de cada promo, siempre a la vista</small></span><span class="pill go">Manguito Plus</span></div>
       </div>
-      <ul><li>Renovamos tus promociones antes de que venzan</li><li>Negociación constante con las compañías</li><li>Todos tus servicios en un solo panel</li><li>Cancelás cuando quieras, con un clic</li></ul>
-      <a class="btn btn-primary btn-shine" href="#registro" style="justify-self:start">Activar Manguito Plus</a></div>
+      <ul><li>Renovamos tus promociones antes de que venzan</li><li>Calendario de vencimiento de tus promociones</li><li>Negociación constante con las compañías</li><li>Todos tus servicios en un solo panel</li><li>Cancelás cuando quieras, con un clic</li></ul>
+      <a class="btn btn-primary btn-shine" href="#registro" style="justify-self:start">Activar Manguito Plus<span class="crown sm" aria-hidden="true">👑</span></a></div>
   </div>
 </div></section>
 
@@ -2712,7 +2751,8 @@ return{svg:function(text){var q=new Q(-1,L.M);q.addData(text);q.make();var n=q.g
       mk('text',{x:L-5,y:yb(v)+3,'text-anchor':'end'},v===0?'0':(v/1000)+'k');
     });
     var gB=mk('g',{'data-s':'before'}), gW=mk('g',{'data-s':'with'});
-    var pts=[], bw=13;
+    var pts=[], bw=13, TOT=89143, KX=2.4, KC=.1, cum=[];
+    for(var j=0;j<n;j++){cum.push(TOT*(KC+Math.exp(KX*j/(n-1))-1)/(KC+Math.exp(KX)-1))}
     for(var i=0;i<n;i++){
       var cx=L+gw*i+gw/2;
       var h1=before/60000*H, h2=after/60000*H, hot=(i===n-1);
@@ -2722,7 +2762,7 @@ return{svg:function(text){var q=new Q(-1,L.M);q.addData(text);q.make();var n=q.g
       var r2=mk('rect',{x:cx+1.5,y:B-h2,width:bw,height:h2,rx:6.5,class:'b2 bar-a'+(hot?' hot':'')},null,gW);
       r2.style.animationDelay=(i*.08+.05)+'s';
       mk('text',{x:cx,y:B+13,'text-anchor':'middle'},'M'+(i+1));
-      pts.push([cx,yc(mo*(i+1))]);
+      pts.push([cx,yc(cum[i])]);
     }
     /* dashed reference line + arrow tag, like the design */
     var ry=yb(before);
@@ -2733,7 +2773,9 @@ return{svg:function(text){var q=new Q(-1,L.M);q.addData(text);q.make();var n=q.g
     mk('text',{x:R+19,y:ry+17,'text-anchor':'middle',style:'fill:rgba(255,255,255,.7);font-size:7.5px'},'52k',null,gB);
     mk('text',{x:L+gw/2+8.5,y:B-after/60000*H-4,'text-anchor':'middle',style:'fill:#FF8A1F'},'37k',null,gW);
     var gA=mk('g',{'data-s':'acc'});
-    var d='M'+pts.map(function(p){return p[0].toFixed(1)+' '+p[1].toFixed(1)}).join('L');
+    var d='M'+pts[0][0].toFixed(1)+' '+pts[0][1].toFixed(1);
+    for(var q=0;q<n-1;q++){var p0=pts[q-1]||pts[q],p1=pts[q],p2=pts[q+1],p3=pts[q+2]||p2;
+      d+='C'+(p1[0]+(p2[0]-p0[0])/6).toFixed(1)+' '+(p1[1]+(p2[1]-p0[1])/6).toFixed(1)+' '+(p2[0]-(p3[0]-p1[0])/6).toFixed(1)+' '+(p2[1]-(p3[1]-p1[1])/6).toFixed(1)+' '+p2[0].toFixed(1)+' '+p2[1].toFixed(1)}
     var last=pts[n-1];
     mk('path',{d:d+'L'+last[0].toFixed(1)+' '+B+'L'+pts[0][0].toFixed(1)+' '+B+'Z',fill:'url(#accFill)',class:'acc-area'},null,gA);
     mk('path',{d:d,fill:'none',stroke:'#4ADE96','stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round',filter:'url(#accBlur)',class:'acc-glow'},null,gA);
@@ -2743,6 +2785,23 @@ return{svg:function(text){var q=new Q(-1,L.M);q.addData(text);q.make();var n=q.g
     var pg=mk('g',{class:'dot-a'},null,gA);pg.style.animationDelay='2s';
     mk('rect',{x:last[0]-58,y:last[1]-21.5,width:52,height:15,rx:7.5,fill:'#4ADE96'},null,pg);
     mk('text',{x:last[0]-32,y:last[1]-11.1,'text-anchor':'middle',style:'fill:#07210f;font-weight:700;font-size:8.5px'},'$89.143',null,pg);
+
+    /* KPI count-up: monthly saving rises, 6-month total climbs month by month along the curve */
+    (function(){
+      var a=$('kp-mo'),b=$('kp-6');if(!a||!b)return;
+      var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;if(rm)return;
+      function f(v){return '$'+String(Math.round(v)).replace(/\B(?=(\d{3})+(?!\d))/g,'.')}
+      function ease(t){return 1-Math.pow(1-t,3)}
+      a.textContent=f(0);b.textContent=f(0);
+      var T0=null,SEG=420,DELAY=350,mv=[0].concat(cum);mv[mv.length-1]=TOT;
+      function step(ts){if(T0==null)T0=ts;var t=ts-T0-DELAY,go=true;
+        if(t<0){requestAnimationFrame(step);return}
+        a.textContent=f(mo*ease(Math.min(1,t/1500)));
+        var k=Math.min(Math.floor(t/SEG),n-1),u=Math.min(1,(t-k*SEG)/SEG);
+        b.textContent=f(mv[k]+(mv[k+1]-mv[k])*ease(u));
+        if(t<n*SEG+60)requestAnimationFrame(step);else{a.textContent=f(mo);b.textContent=f(TOT)}}
+      requestAnimationFrame(step);
+    })();
 
     var legs=[].slice.call(chart.querySelectorAll('.leg'));
     var NOTES={
@@ -3654,4 +3713,14 @@ return{svg:function(text){var q=new Q(-1,L.M);q.addData(text);q.make();var n=q.g
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
   cards.forEach(function(c){io.observe(c)});
 })();
+</script>
+<script>
+/* background tint: yellow -> mango green while the savings ticket is on screen */
+(function(){var c=document.getElementById('calculadora');if(!c)return;var raf=0;
+function clamp(v){return v<0?0:v>1?1:v}
+function upd(){raf=0;var vh=window.innerHeight||800,r=c.getBoundingClientRect();
+var gin=clamp((vh*.9-r.top)/(vh*.55)),gout=clamp(r.bottom/(vh*.6));
+document.body.style.setProperty('--g',(r.height?Math.min(gin,gout):0).toFixed(3))}
+function q(){if(!raf)raf=requestAnimationFrame(upd)}
+addEventListener('scroll',q,{passive:true});addEventListener('resize',q);addEventListener('hashchange',function(){setTimeout(upd,60)});upd()})();
 </script>
